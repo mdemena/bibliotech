@@ -1,0 +1,81 @@
+@reference "tailwindcss";
+
+/* Shared UI Components with Tailwind @apply */
+
+.btn-primary {
+    @apply px-4 py-2 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 active:scale-[0.98];
+}
+
+.btn-secondary {
+    @apply px-4 py-2 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200;
+}
+
+.btn-danger {
+    @apply px-4 py-2 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-red-500 hover:bg-red-600 text-white shadow-md shadow-red-500/20 active:scale-[0.98];
+}
+
+.btn-ghost {
+    @apply px-4 py-2 rounded-xl font-semibold transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400;
+}
+
+.card {
+    @apply bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden;
+}
+
+.input {
+    @apply w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-white;
+}
+
+.label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5;
+}
+
+.modal-backdrop {
+    @apply fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4;
+}
+
+.modal-content {
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all;
+}
+
+.badge-blue {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300;
+}
+
+.badge-gray {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300;
+}
+
+.badge-green {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300;
+}
+
+.badge-orange {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300;
+}
+
+.section-title {
+    @apply text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6;
+}
+
+/* Tree View Styles */
+.tree-node {
+    @apply border-l-2 border-gray-100 dark:border-gray-700 ml-4 pl-4 py-1;
+}
+
+.tree-node-content {
+    @apply flex items-center py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all;
+}
+
+/* Search Bar */
+.search-container {
+    @apply relative;
+}
+
+.search-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400;
+}
+
+.search-input {
+    @apply w-full px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-sm text-gray-900 dark:text-white pl-10;
+}
