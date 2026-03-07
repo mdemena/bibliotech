@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         <BrowserRouter>
           <Routes>
             {/* Public routes */}
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
@@ -39,7 +41,7 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               }
             >
-              <Route path="/" element={<DashboardPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/books" element={<BooksPage />} />
               <Route path="/books/:id" element={<BookDetailPage />} />
               <Route path="/authors" element={<AuthorsPage />} />

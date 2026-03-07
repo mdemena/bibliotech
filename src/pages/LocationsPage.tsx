@@ -7,7 +7,6 @@ import {
 import { locationsApi } from '../api/locationsApi';
 import type { LocationNode } from '../types/database.types';
 import LocationForm from '../components/LocationForm';
-import '../styles/components.css';
 
 const TreeNode: React.FC<{
     node: LocationNode;
@@ -26,24 +25,24 @@ const TreeNode: React.FC<{
 
     return (
         <div className={level > 0 ? 'tree-node' : ''}>
-            <div className="tree-node-content">
+            <div className="tree-node-content group relative pr-12 sm:pr-0">
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className={`p-1 mr-2 text-gray-400 hover:text-gray-600 transition-transform ${isExpanded ? 'rotate-0' : '-rotate-90'} ${!hasChildren ? 'invisible' : ''}`}
+                    className={`p-1 mr-1 text-gray-400 hover:text-gray-600 transition-transform ${isExpanded ? 'rotate-0' : '-rotate-90'} ${!hasChildren ? 'invisible' : ''}`}
                 >
-                    <FiChevronDown size={16} />
+                    <FiChevronDown size={14} />
                 </button>
 
                 <div className="flex items-center flex-1 min-w-0">
-                    <span className={`${levelClass} mr-3 whitespace-nowrap`}>
+                    <span className={`${levelClass} mr-2 whitespace-nowrap text-[10px] scale-90 origin-left`}>
                         {node.level_name}
                     </span>
-                    <span className="font-medium text-gray-900 dark:text-white truncate">
+                    <span className="font-semibold text-gray-900 dark:text-white truncate text-sm">
                         {node.name}
                     </span>
                 </div>
 
-                <div className="flex opacity-0 group-hover:opacity-100 transition-opacity gap-1 ml-4">
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 flex sm:static sm:translate-y-0 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity gap-0.5 ml-2">
                     <button
                         className="p-1.5 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-md"
                         title="Añadir sub-ubicación"
@@ -69,7 +68,7 @@ const TreeNode: React.FC<{
             </div>
 
             {isExpanded && hasChildren && (
-                <div className="mt-1">
+                <div className="mt-0.5">
                     {node.children!.map((child) => (
                         <TreeNode
                             key={child.id}
@@ -126,18 +125,18 @@ const LocationsPage: React.FC = () => {
 
     return (
         <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h1 className="section-title mb-1">Ubicaciones Físicas</h1>
                     <p className="text-gray-500 text-sm">Organiza tu biblioteca con una estructura jerárquica personalizada</p>
                 </div>
-                <button className="btn-primary" onClick={handleAddRoot}>
+                <button className="btn-primary w-full sm:w-auto" onClick={handleAddRoot}>
                     <FiPlus size={20} className="mr-2" />
                     Nueva Ubicación Raíz
                 </button>
             </div>
 
-            <div className="card p-6 min-h-[300px]">
+            <div className="card p-4 sm:p-6 min-h-[300px]">
                 {isLoading ? (
                     <div className="flex flex-col items-center justify-center h-48 text-gray-500">
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
@@ -151,7 +150,7 @@ const LocationsPage: React.FC = () => {
                         <button className="btn-primary mt-6" onClick={handleAddRoot}>Empieza aquí</button>
                     </div>
                 ) : (
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                         {tree.map((node) => (
                             <TreeNode
                                 key={node.id}
@@ -178,7 +177,7 @@ const LocationsPage: React.FC = () => {
             {/* Delete Confirmation */}
             {deleteId && (
                 <div className="modal-backdrop">
-                    <div className="modal-content p-6 border-t-4 border-red-500">
+                    <div className="modal-content p-6 border-t-4 border-red-500 mx-4">
                         <div className="flex items-center gap-3 text-red-600 mb-4">
                             <FiAlertTriangle size={24} />
                             <h3 className="text-lg font-bold">¿Eliminar ubicación?</h3>
@@ -186,10 +185,10 @@ const LocationsPage: React.FC = () => {
                         <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">
                             Esta acción eliminará esta ubicación y **todas sus sub-ubicaciones**. Los libros vinculados a estas ubicaciones podrían quedar huérfanos.
                         </p>
-                        <div className="flex justify-end gap-3">
-                            <button className="btn-secondary" onClick={() => setDeleteId(null)}>Cancelar</button>
+                        <div className="flex flex-col sm:flex-row justify-end gap-3">
+                            <button className="btn-secondary w-full sm:w-auto" onClick={() => setDeleteId(null)}>Cancelar</button>
                             <button
-                                className="btn-danger"
+                                className="btn-danger w-full sm:w-auto"
                                 onClick={() => deleteMutation.mutate(deleteId)}
                             >
                                 Eliminar todo

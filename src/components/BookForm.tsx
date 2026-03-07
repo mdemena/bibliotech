@@ -7,7 +7,6 @@ import { authorsApi } from '../api/authorsApi';
 import { locationsApi } from '../api/locationsApi';
 import type { BookFormData } from '../types/database.types';
 import StarRating from './StarRating';
-import '../styles/components.css';
 
 interface BookFormProps {
     isOpen: boolean;
@@ -71,8 +70,8 @@ const BookForm: React.FC<BookFormProps> = ({ isOpen, onClose, book }) => {
 
     return (
         <div className="modal-backdrop">
-            <div className="modal-content max-w-2xl" onClick={(e) => e.stopPropagation()}>
-                <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
+            <div className="modal-content max-w-2xl mx-4" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-700">
                     <h2 className="text-xl font-bold dark:text-white">
                         {book ? 'Editar Libro' : 'Añadir Nuevo Libro'}
                     </h2>
@@ -81,7 +80,7 @@ const BookForm: React.FC<BookFormProps> = ({ isOpen, onClose, book }) => {
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-5 md:p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Cover Preview */}
                         <div className="md:col-span-1">
@@ -114,7 +113,7 @@ const BookForm: React.FC<BookFormProps> = ({ isOpen, onClose, book }) => {
                                 {errors.title && <p className="mt-1 text-xs text-red-500">{errors.title.message}</p>}
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="label">Autor</label>
                                     <select
@@ -135,7 +134,7 @@ const BookForm: React.FC<BookFormProps> = ({ isOpen, onClose, book }) => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="label">Idioma</label>
                                     <select className="input" {...register('language')}>
@@ -164,20 +163,20 @@ const BookForm: React.FC<BookFormProps> = ({ isOpen, onClose, book }) => {
                                     <StarRating
                                         rating={rating}
                                         onRatingChange={(r) => setValue('rating', r)}
-                                        size={24}
+                                        size={28}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex justify-end gap-3 pt-6 mt-6 border-t border-gray-100 dark:border-gray-700">
-                        <button type="button" className="btn-secondary" onClick={onClose}>
+                    <div className="flex flex-col sm:flex-row justify-end gap-3 pt-6 mt-6 border-t border-gray-100 dark:border-gray-700">
+                        <button type="button" className="btn-secondary w-full sm:w-auto" onClick={onClose}>
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            className="btn-primary px-8"
+                            className="btn-primary w-full sm:w-auto px-8"
                             disabled={isSubmitting || mutation.isPending}
                         >
                             <FiSave size={18} className="mr-2" />

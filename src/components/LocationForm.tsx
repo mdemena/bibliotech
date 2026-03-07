@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FiX, FiSave, FiInfo } from 'react-icons/fi';
 import { locationsApi } from '../api/locationsApi';
 import type { LocationNodeFormData } from '../types/database.types';
-import '../styles/components.css';
 
 interface LocationFormProps {
     isOpen: boolean;
@@ -50,7 +49,7 @@ const LocationForm: React.FC<LocationFormProps> = ({ isOpen, onClose, editingNod
 
     return (
         <div className="modal-backdrop">
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-content mx-4" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
                     <div>
                         <h2 className="text-xl font-bold dark:text-white">
@@ -67,13 +66,13 @@ const LocationForm: React.FC<LocationFormProps> = ({ isOpen, onClose, editingNod
 
                 <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
                     <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl flex gap-3 border border-blue-100 dark:border-blue-900/30">
-                        <FiInfo className="text-blue-600 shrink-0 mt-0.5" />
-                        <p className="text-xs text-blue-700 dark:text-blue-300">
+                        <FiInfo className="text-blue-600 shrink-0 mt-0.5" size={18} />
+                        <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
                             Las ubicaciones son jerárquicas. Ejemplo: Lugar (Casa) → Habitación (Salón) → Mueble (Librería) → Estante (Balda 1).
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className="label">Nivel / Tipo</label>
                             <input
@@ -95,13 +94,13 @@ const LocationForm: React.FC<LocationFormProps> = ({ isOpen, onClose, editingNod
                         </div>
                     </div>
 
-                    <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <button type="button" className="btn-secondary" onClick={onClose}>
+                    <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
+                        <button type="button" className="btn-secondary w-full sm:w-auto" onClick={onClose}>
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            className="btn-primary"
+                            className="btn-primary w-full sm:w-auto"
                             disabled={isSubmitting || mutation.isPending}
                         >
                             <FiSave size={18} className="mr-2" />

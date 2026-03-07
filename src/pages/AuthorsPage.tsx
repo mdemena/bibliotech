@@ -3,7 +3,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { FiPlus, FiEdit2, FiTrash2, FiSearch, FiGlobe } from 'react-icons/fi';
 import { authorsApi } from '../api/authorsApi';
 import AuthorForm from '../components/AuthorForm';
-import '../styles/components.css';
 
 const AuthorsPage: React.FC = () => {
     const [search, setSearch] = useState('');
@@ -42,12 +41,12 @@ const AuthorsPage: React.FC = () => {
 
     return (
         <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h1 className="section-title mb-1">Catálogo de Autores</h1>
                     <p className="text-gray-500 text-sm">Gestiona el maestro global de autores compartidos</p>
                 </div>
-                <button className="btn-primary" onClick={handleAdd}>
+                <button className="btn-primary w-full sm:w-auto" onClick={handleAdd}>
                     <FiPlus size={20} className="mr-2" />
                     Añadir Autor
                 </button>
@@ -66,8 +65,8 @@ const AuthorsPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
+                <div className="table-container">
+                    <table className="w-full text-left min-w-[600px]">
                         <thead className="bg-gray-50 dark:bg-gray-800/50 text-gray-500 uppercase text-xs font-bold">
                             <tr>
                                 <th className="px-6 py-4">Autor</th>
@@ -140,15 +139,15 @@ const AuthorsPage: React.FC = () => {
             {/* Delete Confirmation Modal */}
             {deleteId && (
                 <div className="modal-backdrop">
-                    <div className="modal-content p-6 border-t-4 border-red-500">
+                    <div className="modal-content p-6 border-t-4 border-red-500 mx-4">
                         <h3 className="text-lg font-bold mb-2">¿Estás seguro?</h3>
                         <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">
                             Esta acción eliminará permanentemente al autor. Asegúrate de que no tenga libros vinculados si tienes restricciones en la base de datos.
                         </p>
-                        <div className="flex justify-end gap-3">
-                            <button className="btn-secondary" onClick={() => setDeleteId(null)}>Cancelar</button>
+                        <div className="flex flex-col sm:flex-row justify-end gap-3">
+                            <button className="btn-secondary w-full sm:w-auto" onClick={() => setDeleteId(null)}>Cancelar</button>
                             <button
-                                className="btn-danger"
+                                className="btn-danger w-full sm:w-auto"
                                 onClick={() => deleteMutation.mutate(deleteId)}
                             >
                                 Eliminar Autor

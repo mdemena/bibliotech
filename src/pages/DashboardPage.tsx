@@ -7,7 +7,6 @@ import { authorsApi } from '../api/authorsApi';
 import { locationsApi } from '../api/locationsApi';
 import { useAuth } from '../contexts/AuthContext';
 import StarRating from '../components/StarRating';
-import '../styles/components.css';
 
 const DashboardPage: React.FC = () => {
     const { user } = useAuth();
@@ -48,30 +47,30 @@ const DashboardPage: React.FC = () => {
 
     return (
         <div className="container mx-auto">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
                 <div>
-                    <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+                    <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white text-center sm:text-left">
                         ¡Hola, {displayName}! 👋
                     </h1>
-                    <p className="text-gray-500 mt-1">Aquí tienes un resumen de tu biblioteca</p>
+                    <p className="text-gray-500 mt-1 text-center sm:text-left">Aquí tienes un resumen de tu biblioteca</p>
                 </div>
-                <button className="btn-primary" onClick={() => navigate('/books')}>
+                <button className="btn-primary w-full sm:w-auto" onClick={() => navigate('/books')}>
                     <FiPlus size={20} className="mr-2" />
                     Añadir Libro
                 </button>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
                 {stats.map((stat) => (
                     <div key={stat.label} className="card p-6">
                         <div className="flex items-center gap-4">
                             <div className={`${stat.bg} ${stat.color} p-3 rounded-2xl`}>
                                 <stat.icon size={24} />
                             </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{stat.label}</p>
-                                <p className="text-2xl font-extrabold text-gray-900 dark:text-white">{stat.value}</p>
+                            <div className="flex-1">
+                                <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{stat.label}</p>
+                                <p className="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white">{stat.value}</p>
                             </div>
                         </div>
                     </div>
@@ -91,7 +90,7 @@ const DashboardPage: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="card divide-y divide-gray-100 dark:divide-gray-700">
+                    <div className="card divide-y divide-gray-100 dark:divide-gray-700 font-medium">
                         {recentBooks.length === 0 ? (
                             <div className="p-10 text-center text-gray-500 italic text-sm">Tu biblioteca está vacía.</div>
                         ) : (
@@ -105,10 +104,10 @@ const DashboardPage: React.FC = () => {
                                         {book.cover_url && <img src={book.cover_url} className="w-full h-full object-cover" alt="" />}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-bold text-sm text-gray-900 dark:text-white truncate">{book.title}</h4>
-                                        <p className="text-xs text-gray-500 truncate">{book.author?.name}</p>
+                                        <h4 className="font-bold text-xs md:text-sm text-gray-900 dark:text-white truncate">{book.title}</h4>
+                                        <p className="text-[10px] md:text-xs text-gray-500 truncate">{book.author?.name}</p>
                                     </div>
-                                    <FiChevronRight className="text-gray-300" />
+                                    <FiChevronRight className="text-gray-300 shrink-0" />
                                 </div>
                             ))
                         )}
@@ -124,7 +123,7 @@ const DashboardPage: React.FC = () => {
                         </h2>
                     </div>
 
-                    <div className="card divide-y divide-gray-100 dark:divide-gray-700">
+                    <div className="card divide-y divide-gray-100 dark:divide-gray-700 font-medium">
                         {topBooks.length === 0 ? (
                             <div className="p-10 text-center text-gray-500 italic text-sm">No has valorado ninguna lectura todavía.</div>
                         ) : (
@@ -138,10 +137,10 @@ const DashboardPage: React.FC = () => {
                                         {book.cover_url && <img src={book.cover_url} className="w-full h-full object-cover" alt="" />}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-bold text-sm text-gray-900 dark:text-white truncate">{book.title}</h4>
+                                        <h4 className="font-bold text-xs md:text-sm text-gray-900 dark:text-white truncate">{book.title}</h4>
                                         <StarRating rating={book.rating || 0} readonly size={12} />
                                     </div>
-                                    <FiChevronRight className="text-gray-300" />
+                                    <FiChevronRight className="text-gray-300 shrink-0" />
                                 </div>
                             ))
                         )}

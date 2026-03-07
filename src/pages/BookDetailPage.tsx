@@ -7,7 +7,6 @@ import {
 } from 'react-icons/fi';
 import { booksApi } from '../api/booksApi';
 import StarRating from '../components/StarRating';
-import '../styles/components.css';
 
 const BookDetailPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();

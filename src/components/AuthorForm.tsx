@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FiX, FiSave } from 'react-icons/fi';
 import { authorsApi } from '../api/authorsApi';
 import type { AuthorFormData } from '../types/database.types';
-import '../styles/components.css';
 
 interface AuthorFormProps {
     isOpen: boolean;

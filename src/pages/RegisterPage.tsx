@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiEye, FiEyeOff, FiBook } from 'react-icons/fi';
 import { useAuth } from '../contexts/AuthContext';
-import '../styles/auth.css';
 
 const RegisterPage: React.FC = () => {
     const [displayName, setDisplayName] = useState('');

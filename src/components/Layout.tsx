@@ -5,7 +5,6 @@ import {
     FiLogOut, FiMoon, FiSun, FiChevronDown, FiPlus
 } from 'react-icons/fi';
 import { useAuth } from '../contexts/AuthContext';
-import '../styles/layout.css';
 
 const Layout: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,7 +25,7 @@ const Layout: React.FC = () => {
     };
 
     const navItems = [
-        { name: 'Dashboard', path: '/', icon: FiHome },
+        { name: 'Dashboard', path: '/dashboard', icon: FiHome },
         { name: 'Libros', path: '/books', icon: FiBook },
         { name: 'Autores', path: '/authors', icon: FiUsers },
         { name: 'Ubicaciones', path: '/locations', icon: FiMapPin },
