@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
     FiBook, FiMapPin, FiUsers, FiStar, FiArrowRight,
-    FiCheckCircle, FiShield, FiSmartphone, FiMoon, FiSun
+    FiMoon, FiSun
 } from 'react-icons/fi';
 import { useAuth } from '../contexts/AuthContext';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const HomePage: React.FC = () => {
+    const { t } = useTranslation();
     const { user } = useAuth();
     const navigate = useNavigate();
     const [isDarkMode, setIsDarkMode] = useState(true);
@@ -35,29 +38,29 @@ const HomePage: React.FC = () => {
 
     const features = [
         {
-            title: 'Organización Total',
-            description: 'Gestiona tu colección de libros, autores y ubicaciones de forma centralizada.',
+            title: t('home.features.org_title', 'Organización Total'),
+            description: t('home.features.org_desc', 'Gestiona tu colección de libros, autores y ubicaciones de forma centralizada.'),
             icon: FiBook,
             color: 'text-blue-600',
             bg: 'bg-blue-50 dark:bg-blue-900/20'
         },
         {
-            title: 'Jerarquía Real',
-            description: 'Define ubicaciones físicas precisas: desde tu casa hasta la balda específica.',
+            title: t('home.features.hierarchy_title', 'Jerarquía Real'),
+            description: t('home.features.hierarchy_desc', 'Define ubicaciones físicas precisas: desde tu casa hasta la balda específica.'),
             icon: FiMapPin,
             color: 'text-emerald-600',
             bg: 'bg-emerald-50 dark:bg-emerald-900/20'
         },
         {
-            title: 'Maestro de Autores',
-            description: 'Accede a un catálogo compartido de autores con biografías y nacionalidades.',
+            title: t('home.features.authors_title', 'Maestro de Autores'),
+            description: t('home.features.authors_desc', 'Accede a un catálogo compartido de autores con biografías y nacionalidades.'),
             icon: FiUsers,
             color: 'text-purple-600',
             bg: 'bg-purple-50 dark:bg-purple-900/20'
         },
         {
-            title: 'Reseñas Personales',
-            description: 'Valora tus lecturas y guarda tus impresiones con un sistema de comentarios.',
+            title: t('home.features.reviews_title', 'Reseñas Personales'),
+            description: t('home.features.reviews_desc', 'Valora tus lecturas y guarda tus impresiones con un sistema de comentarios.'),
             icon: FiStar,
             color: 'text-amber-600',
             bg: 'bg-amber-50 dark:bg-amber-900/20'
@@ -67,17 +70,19 @@ const HomePage: React.FC = () => {
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
             {/* Navbar */}
-            <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+            <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-[#0a0a0c]/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
                         <div className="flex items-center space-x-2">
-                            <div className="bg-blue-600 p-1.5 rounded-lg">
+                            <div className="bg-blue-600 p-1.5 rounded-lg shadow-lg shadow-blue-500/30">
                                 <FiBook className="text-white" size={20} />
                             </div>
                             <span className="text-xl font-bold dark:text-white">BiblioTech</span>
                         </div>
 
                         <div className="flex items-center space-x-3 md:space-x-4">
+                            <LanguageSwitcher variant="minimal" />
+
                             <button
                                 onClick={toggleDarkMode}
                                 className="p-2 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
@@ -91,18 +96,18 @@ const HomePage: React.FC = () => {
                                     onClick={() => navigate('/dashboard')}
                                     className="btn-primary"
                                 >
-                                    Ir al Dashboard
+                                    {t('home.ir_dashboard')}
                                 </button>
                             ) : (
                                 <>
                                     <Link to="/login" className="text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hidden sm:block">
-                                        Iniciar Sesión
+                                        {t('common.login')}
                                     </Link>
                                     <button
                                         onClick={() => navigate('/register')}
                                         className="btn-primary"
                                     >
-                                        Registrarse
+                                        {t('common.register')}
                                     </button>
                                 </>
                             )}
@@ -115,53 +120,63 @@ const HomePage: React.FC = () => {
                 {/* Hero Section */}
                 <section className="pt-32 pb-20 px-4">
                     <div className="max-w-7xl mx-auto text-center">
-                        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6">
-                            Tu biblioteca, <span className="text-blue-600">perfectamente</span> organizada.
+                        <div className="inline-flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full text-blue-600 dark:text-blue-400 text-xs font-bold mb-6 border border-blue-100 dark:border-blue-800/50">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                            </span>
+                            <span>Nueva Versión 2.0 ya disponible</span>
+                        </div>
+
+                        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
+                            {t('home.title').split(',')[0]}, <span className="text-blue-600">{t('home.title').split(',')[1] || ''}</span>
                         </h1>
-                        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10">
-                            BiblioTech te ayuda a catalogar tus libros y saber exactamente dónde están en tu mundo físico. Desde habitaciones hasta baldas específicas.
+                        <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-10 leading-relaxed">
+                            {t('home.subtitle')}
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <button
                                 onClick={() => navigate(user ? '/dashboard' : '/register')}
-                                className="btn-primary px-8 py-4 text-lg w-full sm:w-auto"
+                                className="btn-primary px-8 py-4 text-lg w-full sm:w-auto shadow-2xl shadow-blue-500/40"
                             >
-                                Comienza Gratis <FiArrowRight className="ml-2" />
+                                {t('home.cta')} <FiArrowRight className="ml-2" />
                             </button>
                             <a href="#features" className="btn-secondary px-8 py-4 text-lg w-full sm:w-auto">
-                                Ver Funcionalidades
+                                {t('home.view_features')}
                             </a>
                         </div>
 
                         {/* Visual element - Mockup Image */}
-                        <div className="mt-20 relative max-w-5xl mx-auto">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-20 dark:opacity-40" />
-                            <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
+                        <div className="mt-20 relative max-w-5xl mx-auto group">
+                            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-[2.5rem] blur-2xl opacity-50 transition-opacity group-hover:opacity-75" />
+                            <div className="relative bg-white dark:bg-[#121217] rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-800 transition-transform duration-500 group-hover:scale-[1.01]">
                                 <img
                                     src="/app-mockup.png"
                                     alt="Mockup de BiblioTech App"
                                     className="w-full h-auto object-cover"
                                 />
+                                {/* Overlay gradient to merge with bg */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent pointer-events-none" />
                             </div>
                         </div>
                     </div>
                 </section>
 
                 {/* Features Section */}
-                <section id="features" className="py-20 bg-gray-50 dark:bg-gray-800/30">
+                <section id="features" className="py-24 bg-gray-50/50 dark:bg-[#0a0a0c]">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
-                            <h2 className="text-3xl font-bold dark:text-white mb-4">Potencia tu hábito de lectura</h2>
-                            <p className="text-gray-600 dark:text-gray-400">Todo lo que necesitas para gestionar tu colección personal.</p>
+                            <h2 className="text-4xl font-bold dark:text-white mb-4 tracking-tight">Potencia tu hábito de lectura</h2>
+                            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-lg">Todo lo que necesitas para gestionar tu colección personal con una experiencia de primer nivel.</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {features.map((feature) => (
-                                <div key={feature.title} className="card p-8 hover:shadow-xl transition-all duration-300 group">
-                                    <div className={`${feature.bg} ${feature.color} w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                                        <feature.icon size={28} />
+                                <div key={feature.title} className="card p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group border-none dark:bg-[#121217]">
+                                    <div className={`${feature.bg} ${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-inner`}>
+                                        <feature.icon size={30} />
                                     </div>
-                                    <h3 className="text-xl font-bold dark:text-white mb-3">{feature.title}</h3>
+                                    <h3 className="text-xl font-bold dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors uppercase tracking-tight">{feature.title}</h3>
                                     <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                                         {feature.description}
                                     </p>
@@ -171,41 +186,49 @@ const HomePage: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Responsive Info Section */}
-                <section className="py-20">
+                {/* Stats Mockup - New Section inspired by mockup aesthetics */}
+                <section className="py-24 overflow-hidden">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex flex-col lg:flex-row items-center gap-12">
-                            <div className="lg:w-1/2">
-                                <h2 className="text-3xl font-bold dark:text-white mb-6 flex items-center">
-                                    <FiSmartphone className="mr-4 text-blue-600" />
-                                    Diseño 100% Mobile-First
-                                </h2>
-                                <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                                    Consulta tu biblioteca desde cualquier lugar. Nuestra aplicación está optimizada para que puedas buscar un libro en tus estanterías usando tu móvil, o gestionar grandes lotes desde tu escritorio.
-                                </p>
-                                <ul className="space-y-4">
-                                    {[
-                                        'Interfaz ultra-fluida',
-                                        'Acciones rápidas en móviles',
-                                        'Soporte completo para modo oscuro',
-                                        'Filtros inteligentes e instantáneos'
-                                    ].map((text) => (
-                                        <li key={text} className="flex items-center text-gray-700 dark:text-gray-300">
-                                            <FiCheckCircle className="text-emerald-500 mr-3" />
-                                            {text}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="lg:w-1/2 grid grid-cols-2 gap-4">
-                                <div className="bg-blue-600 h-64 rounded-2xl shadow-xl flex items-center justify-center p-8 text-center text-white">
-                                    <div>
-                                        <FiShield size={40} className="mx-auto mb-4 opacity-50" />
-                                        <p className="font-bold">Seguridad con Supabase</p>
+                        <div className="bg-blue-600 rounded-[3rem] p-12 md:p-20 relative overflow-hidden shadow-2xl shadow-blue-500/20">
+                            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl animate-pulse" />
+                            <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                                <div>
+                                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">Analiza tu progreso como lector</h2>
+                                    <p className="text-blue-100 text-lg mb-8">Gráficos detallados, estadísticas de lectura mensual y seguimiento de tus retos personales. Todo integrado.</p>
+                                    <div className="flex flex-wrap gap-4">
+                                        <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
+                                            <span className="block text-white font-bold text-2xl">1.4k+</span>
+                                            <span className="text-blue-100 text-xs uppercase font-bold tracking-widest">Libros Activos</span>
+                                        </div>
+                                        <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
+                                            <span className="block text-white font-bold text-2xl">98%</span>
+                                            <span className="text-blue-100 text-xs uppercase font-bold tracking-widest">Satisfacción</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="bg-gray-100 dark:bg-gray-800 h-64 rounded-2xl shadow-inner mt-12 flex items-center justify-center">
-                                    <FiSmartphone size={60} className="text-gray-300 dark:text-gray-600" />
+                                <div className="bg-gray-900/50 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
+                                    <div className="flex items-center space-x-2 mb-6">
+                                        <div className="w-3 h-3 rounded-full bg-red-500" />
+                                        <div className="w-3 h-3 rounded-full bg-amber-500" />
+                                        <div className="w-3 h-3 rounded-full bg-green-500" />
+                                    </div>
+                                    <div className="space-y-4">
+                                        {[
+                                            { label: 'Enero', val: '75%', color: 'bg-blue-400' },
+                                            { label: 'Febrero', val: '45%', color: 'bg-indigo-400' },
+                                            { label: 'Marzo', val: '90%', color: 'bg-purple-400' },
+                                        ].map(stat => (
+                                            <div key={stat.label}>
+                                                <div className="flex justify-between text-xs text-blue-100 font-bold mb-1 uppercase tracking-tighter">
+                                                    <span>{stat.label}</span>
+                                                    <span>{stat.val}</span>
+                                                </div>
+                                                <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                                                    <div className={`h-full ${stat.color} transition-all duration-1000`} style={{ width: stat.val }} />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -213,13 +236,13 @@ const HomePage: React.FC = () => {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-20">
-                    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-blue-600 rounded-3xl py-16 shadow-2xl shadow-blue-500/20">
-                        <h2 className="text-3xl font-bold text-white mb-6">¿Listo para organizar tu biblioteca?</h2>
-                        <p className="text-blue-100 mb-10 text-lg">Únete a otros lectores y toma el control de tu colección hoy mismo.</p>
+                <section className="py-20 mb-20 text-center">
+                    <div className="max-w-3xl mx-auto px-4">
+                        <h2 className="text-4xl font-extrabold dark:text-white mb-6 tracking-tight">¿Listo para organizar tu biblioteca?</h2>
+                        <p className="text-gray-600 dark:text-gray-400 mb-10 text-lg">Únete a otros lectores y toma el control de tu colección hoy mismo con una herramienta diseñada para amantes de los libros.</p>
                         <button
                             onClick={() => navigate('/register')}
-                            className="bg-white text-blue-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all shadow-xl active:scale-[0.98]"
+                            className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-500/30 active:scale-[0.98]"
                         >
                             Crea tu cuenta gratis
                         </button>
@@ -227,15 +250,16 @@ const HomePage: React.FC = () => {
                 </section>
             </main>
 
-            <footer className="py-12 border-t border-gray-100 dark:border-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="flex items-center justify-center space-x-2 mb-4">
-                        <div className="bg-gray-200 dark:bg-gray-700 p-1 rounded-md">
-                            <FiBook className="text-gray-600 dark:text-gray-400" size={16} />
+            <footer className="py-12 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-[#0a0a0c]">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+                    <div className="flex items-center justify-center space-x-2 mb-6">
+                        <div className="bg-blue-600 p-1 rounded-lg shadow-lg shadow-blue-500/20">
+                            <FiBook className="text-white" size={20} />
                         </div>
-                        <span className="font-bold dark:text-white">BiblioTech</span>
+                        <span className="text-xl font-bold dark:text-white">BiblioTech</span>
                     </div>
-                    <p className="text-gray-500 text-sm">© 2026 BiblioTech. Gestión premium de bibliotecas personales.</p>
+                    <p className="text-sm tracking-tighter uppercase font-bold text-gray-400 dark:text-gray-600 mb-2 italic">Designed for real book lovers</p>
+                    <p className="text-xs">© 2026 BiblioTech — Premium Book Management System.</p>
                 </div>
             </footer>
         </div>

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FiX, FiSave, FiInfo } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import { FiX, FiSave, FiInfo, FiLayers, FiMapPin } from 'react-icons/fi';
 import { locationsApi } from '../api/locationsApi';
 import type { LocationNodeFormData } from '../types/database.types';
 
@@ -13,6 +14,7 @@ interface LocationFormProps {
 }
 
 const LocationForm: React.FC<LocationFormProps> = ({ isOpen, onClose, editingNode, parentNode }) => {
+    const { t } = useTranslation();
     const queryClient = useQueryClient();
     const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<LocationNodeFormData>();
 
@@ -48,63 +50,75 @@ const LocationForm: React.FC<LocationFormProps> = ({ isOpen, onClose, editingNod
     if (!isOpen) return null;
 
     return (
-        <div className="modal-backdrop">
-            <div className="modal-content mx-4" onClick={(e) => e.stopPropagation()}>
-                <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
+        <div className="modal-backdrop backdrop-blur-sm z-[100]">
+            <div className="modal-content max-w-xl mx-4 rounded-[2.5rem] border-none shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between p-8 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
                     <div>
-                        <h2 className="text-xl font-bold dark:text-white">
-                            {editingNode ? 'Editar Ubicación' : 'Nueva Ubicación'}
+                        <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">
+                            {editingNode ? t('forms.edit_location', 'Editar Ubicación') : t('forms.add_location', 'Nueva Ubicación')}
                         </h2>
                         {parentNode && (
-                            <p className="text-xs text-gray-500 mt-0.5">Dentro de: <span className="font-semibold text-blue-600">{parentNode.name}</span></p>
+                            <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mt-2">{t('forms.inside_of', 'Dentro de')}: <span className="text-gray-900 dark:text-white">{parentNode.name}</span></p>
                         )}
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                        <FiX size={20} />
+                    <button onClick={onClose} className="w-10 h-10 flex items-center justify-center hover:bg-white dark:hover:bg-gray-800 rounded-2xl transition-all shadow-sm">
+                        <FiX size={20} className="text-gray-400" />
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
-                    <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl flex gap-3 border border-blue-100 dark:border-blue-900/30">
-                        <FiInfo className="text-blue-600 shrink-0 mt-0.5" size={18} />
-                        <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
-                            Las ubicaciones son jerárquicas. Ejemplo: Lugar (Casa) → Habitación (Salón) → Mueble (Librería) → Estante (Balda 1).
+                <form onSubmit={handleSubmit(onSubmit)} className="p-8 md:p-10 space-y-8">
+                    <div className="bg-blue-50/50 dark:bg-blue-900/10 p-6 rounded-3xl flex gap-4 border border-blue-100/50 dark:border-blue-900/20">
+                        <div className="w-10 h-10 rounded-2xl bg-white dark:bg-gray-900 flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                            <FiInfo size={20} />
+                        </div>
+                        <p className="text-[11px] font-medium text-blue-700/80 dark:text-blue-300 leading-relaxed">
+                            {t('forms.location_help', 'Las ubicaciones son jerárquicas. Ejemplo: Casa → Salón → Librería → Balda 1.')}
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div>
-                            <label className="label">Nivel / Tipo</label>
-                            <input
-                                className={`input ${errors.level_name ? 'border-red-500' : ''}`}
-                                placeholder="Ej: Habitación, Estante..."
-                                {...register('level_name', { required: 'El tipo de nivel es obligatorio' })}
-                            />
-                            {errors.level_name && <p className="mt-1 text-xs text-red-500">{errors.level_name.message}</p>}
+                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block px-1">
+                                {t('forms.level_name', 'Nivel / Tipo')}
+                            </label>
+                            <div className="relative group">
+                                <FiLayers className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                                <input
+                                    className={`w-full bg-gray-50 dark:bg-gray-900 border ${errors.level_name ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-gray-100 dark:border-gray-800 focus:ring-blue-500/20 focus:border-blue-500'} rounded-2xl py-4 pl-14 pr-6 text-sm font-bold outline-none transition-all dark:text-white`}
+                                    placeholder={t('forms.level_name_placeholder', 'Ej: Habitación, Estante...')}
+                                    {...register('level_name', { required: t('forms.required_level', 'El nombre del nivel es obligatorio') })}
+                                />
+                            </div>
+                            {errors.level_name && <p className="mt-2 text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">{errors.level_name.message}</p>}
                         </div>
 
                         <div>
-                            <label className="label">Nombre</label>
-                            <input
-                                className={`input ${errors.name ? 'border-red-500' : ''}`}
-                                placeholder="Ej: Mi Despacho, Balda A..."
-                                {...register('name', { required: 'El nombre es obligatorio' })}
-                            />
-                            {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
+                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block px-1">
+                                {t('forms.name', 'Nombre')}
+                            </label>
+                            <div className="relative group">
+                                <FiMapPin className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                                <input
+                                    className={`w-full bg-gray-50 dark:bg-gray-900 border ${errors.name ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-gray-100 dark:border-gray-800 focus:ring-blue-500/20 focus:border-blue-500'} rounded-2xl py-4 pl-14 pr-6 text-sm font-bold outline-none transition-all dark:text-white`}
+                                    placeholder={t('forms.name_placeholder', 'Ej: Mi Despacho, Balda A...')}
+                                    {...register('name', { required: t('forms.required_name', 'El nombre es obligatorio') })}
+                                />
+                            </div>
+                            {errors.name && <p className="mt-2 text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">{errors.name.message}</p>}
                         </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <button type="button" className="btn-secondary w-full sm:w-auto" onClick={onClose}>
-                            Cancelar
+                    <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6">
+                        <button type="button" className="btn-secondary py-4 px-10 font-bold order-2 sm:order-1" onClick={onClose}>
+                            {t('common.cancel', 'Cancelar')}
                         </button>
                         <button
                             type="submit"
-                            className="btn-primary w-full sm:w-auto"
+                            className="bg-blue-600 text-white rounded-2xl font-bold py-4 px-12 hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center order-1 sm:order-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={isSubmitting || mutation.isPending}
                         >
-                            <FiSave size={18} className="mr-2" />
-                            {editingNode ? 'Actualizar' : 'Crear Ubicación'}
+                            <FiSave size={20} className="mr-3" />
+                            {editingNode ? t('forms.update', 'Actualizar') : t('forms.save', 'Guardar')}
                         </button>
                     </div>
                 </form>

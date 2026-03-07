@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FiX, FiSave } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import { FiX, FiSave, FiUser, FiGlobe, FiInfo } from 'react-icons/fi';
 import { authorsApi } from '../api/authorsApi';
 import type { AuthorFormData } from '../types/database.types';
 
@@ -12,6 +13,7 @@ interface AuthorFormProps {
 }
 
 const AuthorForm: React.FC<AuthorFormProps> = ({ isOpen, onClose, author }) => {
+    const { t } = useTranslation();
     const queryClient = useQueryClient();
     const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<AuthorFormData>();
 
@@ -43,57 +45,72 @@ const AuthorForm: React.FC<AuthorFormProps> = ({ isOpen, onClose, author }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal-backdrop">
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
-                    <h2 className="text-xl font-bold dark:text-white">
-                        {author ? 'Editar Autor' : 'Añadir Nuevo Autor'}
+        <div className="modal-backdrop backdrop-blur-sm z-[100]">
+            <div className="modal-content max-w-xl mx-4 rounded-[2.5rem] border-none shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between p-8 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
+                    <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight">
+                        {author ? t('forms.edit_author', 'Editar Autor') : t('forms.add_author', 'Añadir Nuevo Autor')}
                     </h2>
-                    <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                        <FiX size={20} />
+                    <button onClick={onClose} className="w-10 h-10 flex items-center justify-center hover:bg-white dark:hover:bg-gray-800 rounded-2xl transition-all shadow-sm">
+                        <FiX size={20} className="text-gray-400" />
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="p-8 md:p-10 space-y-8">
                     <div>
-                        <label className="label">Nombre completo</label>
-                        <input
-                            className={`input ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`}
-                            placeholder="Ej: Gabriel García Márquez"
-                            {...register('name', { required: 'El nombre es obligatorio' })}
-                        />
-                        {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name.message}</p>}
+                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block px-1">
+                            {t('forms.name', 'Nombre completo')}
+                        </label>
+                        <div className="relative group">
+                            <FiUser className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                            <input
+                                className={`w-full bg-gray-50 dark:bg-gray-900 border ${errors.name ? 'border-red-500 focus:ring-red-500/20 focus:border-red-500' : 'border-gray-100 dark:border-gray-800 focus:ring-blue-500/20 focus:border-blue-500'} rounded-2xl py-4 pl-14 pr-6 text-sm font-bold outline-none transition-all dark:text-white`}
+                                placeholder={t('forms.name_placeholder', 'Ej: Gabriel García Márquez')}
+                                {...register('name', { required: t('forms.required_name', 'El nombre es obligatorio') })}
+                            />
+                        </div>
+                        {errors.name && <p className="mt-2 text-[10px] font-black text-red-500 uppercase tracking-widest ml-1">{errors.name.message}</p>}
                     </div>
 
                     <div>
-                        <label className="label">Nacionalidad</label>
-                        <input
-                            className="input"
-                            placeholder="Ej: Colombiano"
-                            {...register('nationality')}
-                        />
+                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block px-1">
+                            {t('forms.nationality', 'Nacionalidad')}
+                        </label>
+                        <div className="relative group">
+                            <FiGlobe className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                            <input
+                                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl py-4 pl-14 pr-6 text-sm font-bold outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all dark:text-white"
+                                placeholder={t('forms.nationality_placeholder', 'Ej: Española')}
+                                {...register('nationality')}
+                            />
+                        </div>
                     </div>
 
                     <div>
-                        <label className="label">Biografía corta</label>
-                        <textarea
-                            className="input min-h-[100px] py-3"
-                            placeholder="Breve reseña sobre el autor..."
-                            {...register('bio')}
-                        />
+                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 block px-1">
+                            {t('forms.bio', 'Biografía corta')}
+                        </label>
+                        <div className="relative group">
+                            <FiInfo className="absolute left-5 top-6 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+                            <textarea
+                                className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl py-5 pl-14 pr-6 text-sm font-bold outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all dark:text-white min-h-[120px] leading-relaxed resize-none"
+                                placeholder={t('forms.bio_placeholder', 'Breve biografía del autor...')}
+                                {...register('bio')}
+                            />
+                        </div>
                     </div>
 
-                    <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-700">
-                        <button type="button" className="btn-secondary" onClick={onClose}>
-                            Cancelar
+                    <div className="flex flex-col sm:flex-row justify-end gap-4 pt-6">
+                        <button type="button" className="btn-secondary py-4 px-10 font-bold order-2 sm:order-1" onClick={onClose}>
+                            {t('common.cancel', 'Cancelar')}
                         </button>
                         <button
                             type="submit"
-                            className="btn-primary"
+                            className="bg-blue-600 text-white rounded-2xl font-bold py-4 px-12 hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 active:scale-[0.98] flex items-center justify-center order-1 sm:order-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled={isSubmitting || mutation.isPending}
                         >
-                            <FiSave size={18} className="mr-2" />
-                            {author ? 'Actualizar' : 'Guardar Autor'}
+                            <FiSave size={20} className="mr-3" />
+                            {author ? t('forms.update', 'Actualizar') : t('forms.save', 'Guardar')}
                         </button>
                     </div>
                 </form>
