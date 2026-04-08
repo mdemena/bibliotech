@@ -38,33 +38,39 @@ const HomePage: React.FC = () => {
 
     const features = [
         {
-            title: t('home.features.org_title', 'Organización Total'),
-            description: t('home.features.org_desc', 'Gestiona tu colección de libros, autores y ubicaciones de forma centralizada.'),
+            title: t('home.features.org_title'),
+            description: t('home.features.org_desc'),
             icon: FiBook,
             color: 'text-blue-600',
             bg: 'bg-blue-50 dark:bg-blue-900/20'
         },
         {
-            title: t('home.features.hierarchy_title', 'Jerarquía Real'),
-            description: t('home.features.hierarchy_desc', 'Define ubicaciones físicas precisas: desde tu casa hasta la balda específica.'),
+            title: t('home.features.hierarchy_title'),
+            description: t('home.features.hierarchy_desc'),
             icon: FiMapPin,
             color: 'text-emerald-600',
             bg: 'bg-emerald-50 dark:bg-emerald-900/20'
         },
         {
-            title: t('home.features.authors_title', 'Maestro de Autores'),
-            description: t('home.features.authors_desc', 'Accede a un catálogo compartido de autores con biografías y nacionalidades.'),
+            title: t('home.features.authors_title'),
+            description: t('home.features.authors_desc'),
             icon: FiUsers,
             color: 'text-purple-600',
             bg: 'bg-purple-50 dark:bg-purple-900/20'
         },
         {
-            title: t('home.features.reviews_title', 'Reseñas Personales'),
-            description: t('home.features.reviews_desc', 'Valora tus lecturas y guarda tus impresiones con un sistema de comentarios.'),
+            title: t('home.features.reviews_title'),
+            description: t('home.features.reviews_desc'),
             icon: FiStar,
             color: 'text-amber-600',
             bg: 'bg-amber-50 dark:bg-amber-900/20'
         }
+    ];
+
+    const stats = [
+        { label: t('home.month_jan'), val: '75%', color: 'bg-blue-400' },
+        { label: t('home.month_feb'), val: '45%', color: 'bg-indigo-400' },
+        { label: t('home.month_mar'), val: '90%', color: 'bg-purple-400' },
     ];
 
     return (
@@ -125,7 +131,7 @@ const HomePage: React.FC = () => {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                             </span>
-                            <span>Nueva Versión 2.0 ya disponible</span>
+                            <span>{t('home.version_badge')}</span>
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
@@ -166,8 +172,8 @@ const HomePage: React.FC = () => {
                 <section id="features" className="py-24 bg-gray-50/50 dark:bg-[#0a0a0c]">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl font-bold dark:text-white mb-4 tracking-tight">Potencia tu hábito de lectura</h2>
-                            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-lg">Todo lo que necesitas para gestionar tu colección personal con una experiencia de primer nivel.</p>
+                            <h2 className="text-4xl font-bold dark:text-white mb-4 tracking-tight">{t('home.features_heading')}</h2>
+                            <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto text-lg">{t('home.features_subheading')}</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -186,23 +192,23 @@ const HomePage: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Stats Mockup - New Section inspired by mockup aesthetics */}
+                {/* Stats Mockup Section */}
                 <section className="py-24 overflow-hidden">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="bg-blue-600 rounded-[3rem] p-12 md:p-20 relative overflow-hidden shadow-2xl shadow-blue-500/20">
                             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl animate-pulse" />
                             <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
                                 <div>
-                                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">Analiza tu progreso como lector</h2>
-                                    <p className="text-blue-100 text-lg mb-8">Gráficos detallados, estadísticas de lectura mensual y seguimiento de tus retos personales. Todo integrado.</p>
+                                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">{t('home.stats_heading')}</h2>
+                                    <p className="text-blue-100 text-lg mb-8">{t('home.stats_subheading')}</p>
                                     <div className="flex flex-wrap gap-4">
                                         <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
                                             <span className="block text-white font-bold text-2xl">1.4k+</span>
-                                            <span className="text-blue-100 text-xs uppercase font-bold tracking-widest">Libros Activos</span>
+                                            <span className="text-blue-100 text-xs uppercase font-bold tracking-widest">{t('home.stats_active_books')}</span>
                                         </div>
                                         <div className="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/20">
                                             <span className="block text-white font-bold text-2xl">98%</span>
-                                            <span className="text-blue-100 text-xs uppercase font-bold tracking-widest">Satisfacción</span>
+                                            <span className="text-blue-100 text-xs uppercase font-bold tracking-widest">{t('home.stats_satisfaction')}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -213,11 +219,7 @@ const HomePage: React.FC = () => {
                                         <div className="w-3 h-3 rounded-full bg-green-500" />
                                     </div>
                                     <div className="space-y-4">
-                                        {[
-                                            { label: 'Enero', val: '75%', color: 'bg-blue-400' },
-                                            { label: 'Febrero', val: '45%', color: 'bg-indigo-400' },
-                                            { label: 'Marzo', val: '90%', color: 'bg-purple-400' },
-                                        ].map(stat => (
+                                        {stats.map(stat => (
                                             <div key={stat.label}>
                                                 <div className="flex justify-between text-xs text-blue-100 font-bold mb-1 uppercase tracking-tighter">
                                                     <span>{stat.label}</span>
@@ -238,13 +240,13 @@ const HomePage: React.FC = () => {
                 {/* CTA Section */}
                 <section className="py-20 mb-20 text-center">
                     <div className="max-w-3xl mx-auto px-4">
-                        <h2 className="text-4xl font-extrabold dark:text-white mb-6 tracking-tight">¿Listo para organizar tu biblioteca?</h2>
-                        <p className="text-gray-600 dark:text-gray-400 mb-10 text-lg">Únete a otros lectores y toma el control de tu colección hoy mismo con una herramienta diseñada para amantes de los libros.</p>
+                        <h2 className="text-4xl font-extrabold dark:text-white mb-6 tracking-tight">{t('home.cta_heading')}</h2>
+                        <p className="text-gray-600 dark:text-gray-400 mb-10 text-lg">{t('home.cta_subheading')}</p>
                         <button
                             onClick={() => navigate('/register')}
                             className="bg-blue-600 text-white px-10 py-5 rounded-2xl font-bold text-xl hover:bg-blue-700 transition-all shadow-2xl shadow-blue-500/30 active:scale-[0.98]"
                         >
-                            Crea tu cuenta gratis
+                            {t('home.cta_button')}
                         </button>
                     </div>
                 </section>
