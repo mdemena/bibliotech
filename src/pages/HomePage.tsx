@@ -12,19 +12,15 @@ const HomePage: React.FC = () => {
     const { t } = useTranslation();
     const { user } = useAuth();
     const navigate = useNavigate();
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(
+        () => document.documentElement.classList.contains('dark')
+    );
 
     useEffect(() => {
         if (user) {
             navigate('/dashboard');
         }
     }, [user, navigate]);
-
-    // Sync state with DOM on mount
-    useEffect(() => {
-        const isDark = document.documentElement.classList.contains('dark');
-        setIsDarkMode(isDark);
-    }, []);
 
     const toggleDarkMode = () => {
         const newMode = !isDarkMode;
@@ -34,6 +30,7 @@ const HomePage: React.FC = () => {
         } else {
             document.documentElement.classList.remove('dark');
         }
+        localStorage.setItem('darkMode', String(newMode));
     };
 
     const features = [

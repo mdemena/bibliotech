@@ -12,7 +12,9 @@ const Layout: React.FC = () => {
     const { t } = useTranslation();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(
+        () => document.documentElement.classList.contains('dark')
+    );
     const { user, signOut } = useAuth();
     const navigate = useNavigate();
 
@@ -23,8 +25,14 @@ const Layout: React.FC = () => {
 
     const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
     const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-        document.documentElement.classList.toggle('dark');
+        const newMode = !isDarkMode;
+        setIsDarkMode(newMode);
+        if (newMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        localStorage.setItem('darkMode', String(newMode));
     };
 
     const navItems = [
@@ -81,7 +89,7 @@ const Layout: React.FC = () => {
     );
 
     return (
-        <div className={`main-layout ${isDarkMode ? 'dark' : ''}`}>
+        <div className="main-layout">
             {/* Mobile Backdrop */}
             {sidebarOpen && (
                 <div
