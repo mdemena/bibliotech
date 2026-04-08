@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
         if (error) {
             setErrorMsg(error.message);
         } else {
-            navigate('/');
+            navigate('/dashboard');
         }
     };
 

@@ -20,18 +20,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const hasAuthParams =
+            window.location.search.includes('code=') ||
+            window.location.hash.includes('access_token=') ||
+            window.location.hash.includes('error=');
+
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
             setUser(session?.user ?? null);
-            setLoading(false);
+
+            // If we have auth params, we don't set loading to false yet.
+            // We wait for onAuthStateChange to handle the exchange.
+            if (!hasAuthParams || session) {
+                setLoading(false);
+            }
+            console.log('AuthContext initial session check:', { hasSession: !!session, hasAuthParams, loading: !hasAuthParams || !!session ? 'false' : 'still true' });
         });
 
         // Listen for auth changes
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            console.log('AuthContext state change:', event, { hasSession: !!session });
             setSession(session);
             setUser(session?.user ?? null);
-            setLoading(false);
+
+            // Always set loading to false on any definitive event
+            if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'USER_UPDATED' || event === 'INITIAL_SESSION') {
+                setLoading(false);
+            }
         });
 
         return () => subscription.unsubscribe();
@@ -55,7 +71,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin,
+                redirectTo: `${window.location.origin}/auth/callback`,
             },
         });
     };

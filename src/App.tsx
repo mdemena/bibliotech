@@ -12,6 +12,7 @@ import BooksPage from './pages/BooksPage';
 import BookDetailPage from './pages/BookDetailPage';
 import AuthorsPage from './pages/AuthorsPage';
 import LocationsPage from './pages/LocationsPage';
+import AuthCallbackPage from './pages/AuthCallbackPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,6 +51,7 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
             {/* Protected routes */}
             <Route
