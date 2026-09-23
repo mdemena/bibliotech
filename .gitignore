@@ -1,3 +1,6 @@
+# Enviroment
+.env
+
 # Logs
 logs
 *.log
@@ -23,5 +26,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# Enviroment
-.env
