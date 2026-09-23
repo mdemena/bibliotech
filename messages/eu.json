@@ -15,10 +15,10 @@
         "actions": "Ekintzak",
         "language": "Hizkuntza",
         "view_all": "Ikusi guztiak",
-        "menu": "Menú",
-        "account": "Cuenta",
-        "settings": "Ajustes",
-        "total_books": "Total libros"
+        "menu": "Menua",
+        "account": "Kontua",
+        "settings": "Ezarpenak",
+        "total_books": "Guztira liburuak"
     },
     "home": {
         "title": "Zure liburutegia, hobekien antolatuta.",
@@ -73,7 +73,7 @@
         "creating_account": "Kontua sortzen...",
         "passwords_no_match": "Pasahitzak ez datoz bat",
         "password_min_length": "Pasahitzak gutxienez 6 karaktere izan behar ditu",
-        "invalid_form": "Formulario inválido",
+        "invalid_form": "Inprimaki baliogabea",
         "invalid_credentials": "Credenciales inválidas"
     },
     "dashboard": {
@@ -85,8 +85,8 @@
         "top_rated": "Baloratuenak",
         "avg_rating": "Bataz bestekoa",
         "add_book": "Gehitu Liburua",
-        "authors_count": "Autores",
-        "locations_count": "Ubicaciones"
+        "authors_count": "Egileak",
+        "locations_count": "Kokapenak"
     },
     "books": {
         "title": "Zure Liburutegia",
@@ -99,13 +99,13 @@
         "no_books_desc": "Saiatu iragazkiak aldatzen edo gehitu liburu berri bat.",
         "delete_confirm_title": "Ezabatu liburua",
         "delete_confirm_desc": "Ziur al zaude liburu hau zure bildumatik ezabatu nahi duzula? Ekintza hau ezin da desegin.",
-        "add_book": "Añadir libro",
+        "add_book": "Liburua gehitu",
         "add_book_title": "Añadir libro",
-        "unknown_author": "Desconocido",
-        "delete": "Eliminar",
-        "cancel": "Cancelar",
-        "invalid_form": "Formulario inválido",
-        "empty_comment": "El comentario está vacío"
+        "unknown_author": "Ezezaguna",
+        "delete": "Ezabatu",
+        "cancel": "Utzi",
+        "invalid_form": "Inprimaki baliogabea",
+        "empty_comment": "Iruzkina hutsik dago"
     },
     "authors": {
         "title": "Egileen Katalogoa",
@@ -128,9 +128,9 @@
         "no_description": "Deskribapenik gabe",
         "delete_confirm_title": "Ezabatu kokalekua",
         "delete_confirm_desc": "Ekintza honek kokalekua betiko ezabatuko du. Ziurtatu ez duela libururik barnean.",
-        "delete": "Eliminar todo",
-        "cancel": "Cancelar",
-        "invalid_form": "Formulario inválido"
+        "delete": "Dena ezabatu",
+        "cancel": "Utzi",
+        "invalid_form": "Inprimaki baliogabea"
     },
     "forms": {
         "edit_book": "Editatu Liburua",
@@ -174,24 +174,24 @@
         "required_name": "Izena beharrezkoa da",
         "required_author": "Egile bat hautatu behar duzu",
         "required_level": "Mailaren izena beharrezkoa da",
-        "cancel": "Cancelar",
+        "cancel": "Utzi",
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía"
     },
     "book_detail": {
-        "back": "Volver",
-        "personal_rating": "Valoración personal",
-        "unknown_author": "Autor desconocido",
-        "details": "Detalles",
-        "not_available": "No disponible",
-        "location": "Ubicación",
-        "no_location": "Sin ubicación",
-        "added_on": "Añadido el",
-        "comments": "Comentarios",
-        "comment_placeholder": "Escribe tu impresión sobre el libro...",
-        "no_comments": "Sin comentarios todavía",
-        "your_comment": "Tu comentario",
-        "delete_comment": "Eliminar comentario"
+        "back": "Atzera",
+        "personal_rating": "Balorazio pertsonala",
+        "unknown_author": "Ezagutzen ez den egilea",
+        "details": "Xehetasunak",
+        "not_available": "Ez dago eskuragarri",
+        "location": "Kokapena",
+        "no_location": "Kokapenik gabe",
+        "added_on": "Gehitua",
+        "comments": "Iruzkinak",
+        "comment_placeholder": "Liburuaren gaineko zure iritzia idatzi...",
+        "no_comments": "Iruzkinik ez oraindik",
+        "your_comment": "Zure iruzkina",
+        "delete_comment": "Iruzkina ezabatu"
     }
 }

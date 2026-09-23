@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "vapid": "node scripts/generate-vapid.mjs",
+    "push-demo": "echo \"curl -X POST http://localhost:3000/api/push/send\""
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
@@ -31,6 +33,7 @@
     "react-hook-form": "^7.71.2",
     "serwist": "^9.0.12",
     "tailwind-merge": "^3.0.2",
+    "web-push": "^3.6.7",
     "zod": "^4.0.0"
   },
   "devDependencies": {
@@ -44,6 +47,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@types/web-push": "^3.6.4",
     "eslint": "^9.39.1",
     "eslint-config-next": "^15.5.0",
     "eslint-plugin-import": "^2.32.0",

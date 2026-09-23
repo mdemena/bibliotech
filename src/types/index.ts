@@ -72,3 +72,9 @@ export interface BookFormData {
   rating?: number | null;
   cover_url?: string | null;
 }
+
+export interface PushPayload {
+  title: string;
+  body?: string;
+  url?: string;
+}

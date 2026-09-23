@@ -15,10 +15,10 @@
         "actions": "Actions",
         "language": "Langue",
         "view_all": "Voir tout",
-        "menu": "Menú",
-        "account": "Cuenta",
-        "settings": "Ajustes",
-        "total_books": "Total libros"
+        "menu": "Menu",
+        "account": "Compte",
+        "settings": "Paramètres",
+        "total_books": "Total livres"
     },
     "home": {
         "title": "Votre bibliothèque, parfaitement organisée.",
@@ -73,7 +73,7 @@
         "creating_account": "Création du compte...",
         "passwords_no_match": "Les mots de passe ne correspondent pas",
         "password_min_length": "Le mot de passe doit comporter au moins 6 caractères",
-        "invalid_form": "Formulario inválido",
+        "invalid_form": "Formulaire invalide",
         "invalid_credentials": "Credenciales inválidas"
     },
     "dashboard": {
@@ -85,8 +85,8 @@
         "top_rated": "Les mieux notés",
         "avg_rating": "Moyenne",
         "add_book": "Ajouter un livre",
-        "authors_count": "Autores",
-        "locations_count": "Ubicaciones"
+        "authors_count": "Auteurs",
+        "locations_count": "Emplacements"
     },
     "books": {
         "title": "Votre Bibliothèque",
@@ -99,13 +99,13 @@
         "no_books_desc": "Essayez de modifier les filtres ou ajoutez un nouveau livre.",
         "delete_confirm_title": "Supprimer le livre",
         "delete_confirm_desc": "Êtes-vous sûr de vouloir supprimer ce livre de votre collection ? Cette action est irréversible.",
-        "add_book": "Añadir libro",
+        "add_book": "Ajouter un livre",
         "add_book_title": "Añadir libro",
-        "unknown_author": "Desconocido",
-        "delete": "Eliminar",
-        "cancel": "Cancelar",
-        "invalid_form": "Formulario inválido",
-        "empty_comment": "El comentario está vacío"
+        "unknown_author": "Inconnu",
+        "delete": "Supprimer",
+        "cancel": "Annuler",
+        "invalid_form": "Formulaire invalide",
+        "empty_comment": "Le commentaire est vide"
     },
     "authors": {
         "title": "Catalogue des Auteurs",
@@ -128,9 +128,9 @@
         "no_description": "Pas de description",
         "delete_confirm_title": "Supprimer l'emplacement",
         "delete_confirm_desc": "Cette action supprimera définitivement l'emplacement. Assurez-vous qu'il ne contient pas de livres.",
-        "delete": "Eliminar todo",
-        "cancel": "Cancelar",
-        "invalid_form": "Formulario inválido"
+        "delete": "Tout supprimer",
+        "cancel": "Annuler",
+        "invalid_form": "Formulaire invalide"
     },
     "forms": {
         "edit_book": "Modifier le Livre",
@@ -174,24 +174,24 @@
         "required_name": "Le nom est obligatoire",
         "required_author": "Vous devez sélectionner un auteur",
         "required_level": "Le nom du niveau est obligatoire",
-        "cancel": "Cancelar",
+        "cancel": "Annuler",
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía"
     },
     "book_detail": {
-        "back": "Volver",
-        "personal_rating": "Valoración personal",
-        "unknown_author": "Autor desconocido",
-        "details": "Detalles",
-        "not_available": "No disponible",
-        "location": "Ubicación",
-        "no_location": "Sin ubicación",
-        "added_on": "Añadido el",
-        "comments": "Comentarios",
-        "comment_placeholder": "Escribe tu impresión sobre el libro...",
-        "no_comments": "Sin comentarios todavía",
-        "your_comment": "Tu comentario",
-        "delete_comment": "Eliminar comentario"
+        "back": "Retour",
+        "personal_rating": "Note personnelle",
+        "unknown_author": "Auteur inconnu",
+        "details": "Détails",
+        "not_available": "Non disponible",
+        "location": "Emplacement",
+        "no_location": "Sans emplacement",
+        "added_on": "Ajouté le",
+        "comments": "Commentaires",
+        "comment_placeholder": "Écris tes impressions sur le livre...",
+        "no_comments": "Aucun commentaire pour le moment",
+        "your_comment": "Ton commentaire",
+        "delete_comment": "Supprimer le commentaire"
     }
 }

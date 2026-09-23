@@ -113,13 +113,15 @@ src/
 
 ## Estado actual / tareas conocidas pendientes
 
-- Faltan iconos de PWA en `public/icons/` (icon-192.png, icon-512.png).
-- Envío de notificaciones push (firma VAPID + job que dispara mensajes) sin implementar;
-  hoy solo se guardan suscripciones.
-- Traducciones parciales: algunas keys añadidas recientemente solo tienen
-  valor en `es`/`en` (se copió texto ES como fallback) — revisar si se añaden idiomas.
-- El src de Google OAuth en producción debe registrarse como redirect URI
-  `<origin>/api/auth/callback`.
+- Iconos PWA generados en `public/icons/` (192/512 + apple-touch-icon).
+- Web Push completo: el cliente se suscribe al iniciar sesión y guarda la
+  suscripción en `push_subscriptions`; el envío es `POST /api/push/send`
+  (`src/lib/push.ts`, firma VAPID con `VAPID_PUBLIC_KEY`/`VAPID_PRIVATE_KEY`,
+  limpieza de suscripciones caducadas 404/410). Solo falta un job o UX que
+  dispare notificaciones reales (p. ej. objetivo de lectura mensual).
+- Claves VAPID: generar con `npm run vapid`; NO commitearlas (van en
+  `.env.local`/Vercel secrets).
+- Google OAuth redirect URI en producción: `<origin>/api/auth/callback`.
 
 ## Verificación de Supabase
 

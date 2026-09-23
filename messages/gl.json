@@ -16,8 +16,8 @@
         "language": "Idioma",
         "view_all": "Ver todos",
         "menu": "Menú",
-        "account": "Cuenta",
-        "settings": "Ajustes",
+        "account": "Conta",
+        "settings": "Axustes",
         "total_books": "Total libros"
     },
     "home": {
@@ -86,7 +86,7 @@
         "avg_rating": "Media",
         "add_book": "Engadir Libro",
         "authors_count": "Autores",
-        "locations_count": "Ubicaciones"
+        "locations_count": "Localizacións"
     },
     "books": {
         "title": "A Túa Biblioteca",
@@ -99,13 +99,13 @@
         "no_books_desc": "Proba a cambiar los filtros ou engade un novo libro.",
         "delete_confirm_title": "Eliminar libro",
         "delete_confirm_desc": "Estás seguro de que queres eliminar este libro da túa colección? Esta acción non se pode deshacer.",
-        "add_book": "Añadir libro",
+        "add_book": "Engadir libro",
         "add_book_title": "Añadir libro",
-        "unknown_author": "Desconocido",
+        "unknown_author": "Descoñecido",
         "delete": "Eliminar",
         "cancel": "Cancelar",
         "invalid_form": "Formulario inválido",
-        "empty_comment": "El comentario está vacío"
+        "empty_comment": "O comentario está baleiro"
     },
     "authors": {
         "title": "Catálogo de Autores",
@@ -181,17 +181,17 @@
     },
     "book_detail": {
         "back": "Volver",
-        "personal_rating": "Valoración personal",
-        "unknown_author": "Autor desconocido",
+        "personal_rating": "Valoración persoal",
+        "unknown_author": "Autor descoñecido",
         "details": "Detalles",
-        "not_available": "No disponible",
-        "location": "Ubicación",
-        "no_location": "Sin ubicación",
-        "added_on": "Añadido el",
+        "not_available": "Non dispoñible",
+        "location": "Localización",
+        "no_location": "Sen localización",
+        "added_on": "Engadido o",
         "comments": "Comentarios",
-        "comment_placeholder": "Escribe tu impresión sobre el libro...",
-        "no_comments": "Sin comentarios todavía",
-        "your_comment": "Tu comentario",
+        "comment_placeholder": "Escribe a túa impresión sobre o libro...",
+        "no_comments": "Sen comentarios aínda",
+        "your_comment": "O teu comentario",
         "delete_comment": "Eliminar comentario"
     }
 }

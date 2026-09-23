@@ -66,12 +66,16 @@ policies RLS) para ejecutar desde el SQL Editor de Supabase.
 En Vercel, configurar:
 
 - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` (Web Push)
+- `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` / `NEXT_PUBLIC_VAPID_PUBLIC_KEY` (Web Push)
 - En Google OAuth, registrar el redirect URI `<origin>/api/auth/callback`
 - Secrets `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` en GitHub para el CI
 
-## Pendientes
+## Web Push
 
-- Iconos PWA en `public/icons/` (icon-192.png, icon-512.png)
-- Envío de notificaciones push (firma VAPID + job)
-- Revisar claves i18n nuevas añadidas solo con fallback es/en
+1. Genera las claves VAPID: `npm run vapid` y ponlas en `.env.local` / Vercel:
+   `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `NEXT_PUBLIC_VAPID_PUBLIC_KEY`.
+2. Al iniciar sesión, la app registra el service worker y sucribe automáticamente
+   el navegador; la suscripción se guarda en `push_subscriptions`.
+3. Para enviar una notificación al usuario autenticado:
+   `POST /api/push/send` con `{"title": "...", "body": "...", "url": "/books"}`.
+   Las suscripciones caducadas (404/410) se limpian automáticamente.
