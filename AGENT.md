@@ -107,6 +107,10 @@ src/
 9. **Base de datos**: cambios de esquema se documentan/aplican con SQL en
    `supabase-schema.sql` (SQL Editor de Supabase); habilitar RLS + policies con
    `TO authenticated` + predicado de ownership, nunca solo `authenticated`.
+   Las migraciones futuras de Supabase se generan SIEMPRE en la carpeta
+   `supabase/` del repo (con `supabase migration new <nombre>` o en
+   `supabase/migrations/` si se trabaja con CLI local); no crearlas fuera de
+   ahí ni inventar nombres de fichero.
 10. **Commits**: atómicos, mensaje corto estilo imperativo en inglés o español
     según contexto previo del repo. No commitear artefactos ni secretos.
     El push es a `origin main` directamente (sin PR en repo personal).
