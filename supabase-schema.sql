@@ -179,3 +179,23 @@ CREATE INDEX IF NOT EXISTS idx_books_location_node_id ON books(location_node_id)
 CREATE INDEX IF NOT EXISTS idx_location_nodes_user_id ON location_nodes(user_id);
 CREATE INDEX IF NOT EXISTS idx_location_nodes_parent_id ON location_nodes(parent_id);
 CREATE INDEX IF NOT EXISTS idx_book_comments_book_id ON book_comments(book_id);
+
+-- 8. Push subscriptions (Web Push / PWA)
+CREATE TABLE IF NOT EXISTS push_subscriptions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  endpoint TEXT NOT NULL UNIQUE,
+  subscription JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE push_subscriptions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can manage own push subscriptions"
+  ON push_subscriptions FOR ALL
+  TO authenticated
+  USING ((select auth.uid()) = user_id)
+  WITH CHECK ((select auth.uid()) = user_id);
+
+CREATE INDEX IF NOT EXISTS idx_push_subscriptions_user_id
+  ON push_subscriptions(user_id);

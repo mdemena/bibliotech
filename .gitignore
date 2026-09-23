@@ -26,3 +26,19 @@ dist-ssr
 *.sln
 *.sw?
 
+
+# Next.js
+.next
+out
+.serwist
+next-env.d.ts
+
+# Playwright
+playwright-report
+test-results
+blob-report
+
+# Generated
+public/sw.js
+tsconfig.tsbuildinfo
+*.tsbuildinfo

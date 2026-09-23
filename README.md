@@ -1,75 +1,51 @@
-# React + TypeScript + Vite
+# BiblioTech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gestión de biblioteca personal: catálogo de libros, autores y ubicaciones físicas jerárquicas.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Capa | Tecnología |
+|---|---|
+| Frontend | Next.js 15 (App Router) + React 19 |
+| Lenguaje | TypeScript (strict) |
+| Estilos | Tailwind CSS v4 + CSS Variables |
+| UI | shadcn/ui + Radix UI + Lucide React + Motion |
+| Backend | Next.js Route Handlers + Server Actions (RSC) |
+| Base de datos | Supabase (PostgreSQL, Auth, RLS) |
+| Auth | Supabase Auth (email/pass + Google OAuth) |
+| PWA | Serwist (service worker, offline, Web Push) |
+| i18n | next-intl (es, en, ca, gl, eu, fr con routing `/[locale]`) |
+| Testing | Vitest (unit) + Playwright (E2E) |
+| CI/CD | GitHub Actions → Vercel |
 
-## React Compiler
+## Desarrollo
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+cp .env.example .env   # define NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Scripts disponibles:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `npm run dev` — servidor de desarrollo
+- `npm run build` / `npm run start` — build y producción
+- `npm run lint` / `npm run typecheck`
+- `npm test` — Vitest
+- `npm run test:e2e` — Playwright
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Arquitectura
+
+- **RSC**: las páginas en `src/app/[locale]/(protected)` obtienen datos directamente de Supabase con cliente de servidor (`src/lib/supabase/server.ts`), respetando RLS.
+- **Server Actions**: mutaciones en `src/lib/actions/*.ts` con validación zod y `revalidatePath`.
+- **Middleware**: `src/middleware.ts` combina i18n (next-intl) con refresco de sesión de Supabase y protección de rutas.
+- **Callback OAuth**: `src/app/api/auth/callback/route.ts` intercambia el código de sesión (PKCE).
+- **PWA**: `src/app/sw.ts` + `manifest.json`; las suscripciones push se guardan en `push_subscriptions`.
+
+## Base de datos
+
+`supabase-schema.sql` contiene el esquema aplicable desde el SQL Editor de Supabase.
+
+## Despliegue
+
+En Vercel: configura `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, y las claves VAPID para Web Push. El redirect URI de Google OAuth debe ser `<origin>/api/auth/callback`.
