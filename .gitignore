@@ -1,5 +1,8 @@
-# Enviroment
+# Environment
 .env
+.env.*
+!.env.example
+.env.local
 
 # Logs
 logs
@@ -14,6 +17,10 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# Tests
+coverage
+.vitest
 
 # Editor directories and files
 .vscode/*
@@ -42,3 +49,7 @@ blob-report
 public/sw.js
 tsconfig.tsbuildinfo
 *.tsbuildinfo
+
+# Supabase CLI
+supabase/.temp
+supabase/.branches
