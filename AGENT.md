@@ -111,10 +111,11 @@ src/
    `supabase/` del repo (con `supabase migration new <nombre>` o en
    `supabase/migrations/` si se trabaja con CLI local); no crearlas fuera de
    ahí ni inventar nombres de fichero.
-10. **Git flow**: trabajar en ramas cortas (`feature/`, `fix/`, `chore/`) y
-    abrir PR con base `main`. Los PRs los mergea SIEMPRE el owner manualmente —
-    ningún agente debe mergear ni cerrar un PR. No commitear artefactos ni
-    secretos.
+10. **Git flow**: las ramas cortas (`feature/`, `fix/`, `chore/`) se crean desde
+    `development` y su PR apunta SIEMPRE a `development`. La única PR a `main`
+    es la de integración `development` → `main`. Los PRs los mergea SIEMPRE el
+    owner manualmente — ningún agente debe mergear ni cerrar un PR. No
+    commitear artefactos ni secretos.
 
 ## Estado actual / tareas conocidas pendientes
 
