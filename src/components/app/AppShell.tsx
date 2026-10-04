@@ -162,7 +162,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
         />
       )}
 
-      <aside className={`sidebar ${sidebarOpen ? "sidebar-on" : "sidebar-off"}`}>
+      <aside className={`sidebar ${sidebarOpen ? "sidebar-on" : ""}`}>
         {navContent}
       </aside>
 
@@ -207,7 +207,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
         </div>
 
         <main className="main-content">
-          <div className="max-w-7xl mx-auto">{children}</div>
+          {children}
         </main>
       </div>
 
