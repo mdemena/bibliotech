@@ -105,7 +105,8 @@
         "delete": "Ezabatu",
         "cancel": "Utzi",
         "invalid_form": "Inprimaki baliogabea",
-        "empty_comment": "Iruzkina hutsik dago"
+        "empty_comment": "Iruzkina hutsik dago",
+        "could_not_create": "Liburuaren sortu ezin izan da katalogoan"
     },
     "authors": {
         "title": "Egileen Katalogoa",

@@ -105,7 +105,8 @@
         "delete": "Supprimer",
         "cancel": "Annuler",
         "invalid_form": "Formulaire invalide",
-        "empty_comment": "Le commentaire est vide"
+        "empty_comment": "Le commentaire est vide",
+        "could_not_create": "Impossible de créer le livre dans le catalogue"
     },
     "authors": {
         "title": "Catalogue des Auteurs",

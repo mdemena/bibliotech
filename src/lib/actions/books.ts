@@ -20,11 +20,60 @@ function clean(value: string | null | undefined) {
 }
 
 /**
+ * Garantiza un libro en el catálogo global (books):
+ * 1. busca por ISBN exacto (si hay)
+ * 2. si no, busca por título
+ * 3. si no existe en ningún caso, lo INSERTA
+ * Devuelve el id del libro del catálogo, o el error.
+ */
+async function ensureCatalogBook(
+  supabase: Awaited<ReturnType<typeof supabaseServerClient>>,
+  catalog: {
+    title: string;
+    author_id: string;
+    isbn: string | null;
+    language: string | null;
+    cover_url: string | null;
+  },
+): Promise<{ bookId: string | null; error: string | null }> {
+  if (catalog.isbn) {
+    const { data, error } = await supabase
+      .from("books")
+      .select("id")
+      .eq("isbn", catalog.isbn)
+      .limit(1);
+
+    if (error) return { bookId: null, error: error.message };
+    const found = (data?.[0] as { id: string } | undefined)?.id;
+    if (found) return { bookId: found, error: null };
+  }
+
+  const byTitle = await supabase
+    .from("books")
+    .select("id")
+    .eq("title", catalog.title)
+    .limit(1);
+
+  if (byTitle.error) return { bookId: null, error: byTitle.error.message };
+
+  const found = (byTitle.data?.[0] as { id: string } | undefined)?.id;
+  if (found) return { bookId: found, error: null };
+
+  // No existe en el catálogo → se crea el libro nuevo en la tabla maestra
+  const { data: inserted, error: insertError } = await supabase
+    .from("books")
+    .insert(catalog)
+    .select()
+    .single();
+
+  if (insertError) return { bookId: null, error: insertError.message };
+  return { bookId: (inserted as { id: string }).id, error: null };
+}
+
+/**
  * Guarda un libro de la colección:
  * - actualiza/crea la entrada del usuario (`user_books`) con ubicación y rating
- * - actualiza/crea el libro del catálogo global (`books`) con los datos de
- *   catálogo (título, autor, ISBN…), reutilizando un ISBN existente para
- *   evitar duplicados en el catálogo compartido
+ * - garantiza el libro en el catálogo global (`books`) con `ensureCatalogBook`
  */
 export async function saveBook(formData: FormData): Promise<{ error: string | null }> {
   const parsed = bookSchema.safeParse({
@@ -65,7 +114,6 @@ export async function saveBook(formData: FormData): Promise<{ error: string | nu
     location_node_id: clean(location_node_id),
     rating: rating && rating > 0 ? rating : null,
   };
-
   if (id) {
     // Editar: encontrar la entrada + el libro de catálogo vinculado
     const { data: entry, error: entryError } = await supabase
@@ -85,28 +133,11 @@ export async function saveBook(formData: FormData): Promise<{ error: string | nu
     if (entryResult.error) return { error: entryResult.error.message };
     if (catalogResult.error) return { error: catalogResult.error.message };
   } else {
-    // Crear: reutilizar el libro del catálogo si ya existe (por ISBN o título)
-    let bookId: string | null = null;
-
-    const isbnValue = clean(isbn);
-    const isbnFilter = isbnValue
-      ? await supabase.from("books").select("id").eq("isbn", isbnValue).limit(1)
-      : await supabase.from("books").select("id").eq("title", title).limit(1);
-
-    if (!isbnFilter.error) {
-      bookId = (isbnFilter.data?.[0] as { id: string } | undefined)?.id ?? null;
-    }
-
-    if (!bookId) {
-      const { data: inserted, error: insertError } = await supabase
-        .from("books")
-        .insert(catalogPayload)
-        .select()
-        .single();
-
-      if (insertError) return { error: insertError.message };
-      bookId = (inserted as { id: string }).id;
-    }
+    // Crear: garantizar el libro en la tabla maestra (buscar por ISBN/título)
+    const guaranteed = await ensureCatalogBook(supabase, catalogPayload);
+    if (guaranteed.error) return { error: guaranteed.error };
+    const bookId = guaranteed.bookId;
+    if (!bookId) return { error: "books.could_not_create" };
 
     // Si el usuario ya tiene este libro en su colección, no duplicar
     const { data: existingEntry, error: existingError } = await supabase

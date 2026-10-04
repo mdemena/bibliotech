@@ -105,7 +105,8 @@
         "delete": "Eliminar",
         "cancel": "Cancelar",
         "invalid_form": "Formulario inválido",
-        "empty_comment": "El comentario está vacío"
+        "empty_comment": "El comentario está vacío",
+        "could_not_create": "No se pudo crear el libro en el catálogo"
     },
     "authors": {
         "title": "Catálogo de Autores",
