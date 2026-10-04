@@ -122,3 +122,100 @@ function toUiBook(row: UserBookRow): Book {
     location: row.location ?? null,
   };
 }
+
+// ----------------------------------------
+// Consultas del área admin
+// ----------------------------------------
+
+export interface AdminProfileRow {
+  id: string;
+  display_name: string | null;
+  role: string;
+  books_count: number;
+  created_at: string;
+}
+
+export interface CatalogBookRow {
+  id: string;
+  title: string;
+  isbn: string | null;
+  language: string | null;
+  cover_url: string | null;
+  author: Author | null;
+  owners_count: number;
+  commented_count: number;
+  created_at: string;
+}
+
+/** Todos los usuarios (sólo admins; policy lo filtra). */
+export async function fetchAdminUsers(): Promise<AdminProfileRow[]> {
+  const supabase = await supabaseServerClient();
+  const { data: profiles, error } = await supabase
+    .from("profiles")
+    .select("id, display_name, role, created_at")
+    .order("created_at");
+
+  if (error) throw error;
+
+  const { data: entries, error: entriesError } = await supabase
+    .from("user_books")
+    .select("user_id");
+
+  if (entriesError) throw entriesError;
+
+  const counts = new Map<string, number>();
+  for (const e of entries ?? []) {
+    const uid = (e as { user_id: string }).user_id;
+    counts.set(uid, (counts.get(uid) ?? 0) + 1);
+  }
+
+  return (profiles ?? []).map((p) => ({
+    ...(p as { id: string; display_name: string | null; role: string; created_at: string }),
+    books_count: counts.get((p as { id: string }).id) ?? 0,
+  }));
+}
+
+/** Catálogo global con nº de propietarios y comentarios (sólo admins). */
+export async function fetchCatalog(
+  query: string,
+): Promise<CatalogBookRow[]> {
+  const supabase = await supabaseServerClient();
+
+  let select = supabase
+    .from("books")
+    .select("*, author:authors(*), user_books(count), book_comments(count)")
+    .order("created_at", { ascending: false });
+
+  if (query) {
+    select = select.ilike("title", `%${query}%`);
+  }
+
+  const { data, error } = await select;
+  if (error) throw error;
+
+  return (data ?? []).map((b) => {
+    const row = b as unknown as {
+      id: string;
+      title: string;
+      isbn: string | null;
+      language: string | null;
+      cover_url: string | null;
+      author: Author | null;
+      created_at: string;
+      user_books: [{ count: number }] | [];
+      book_comments: [{ count: number }] | [];
+    };
+    return {
+      id: row.id,
+      title: row.title,
+      isbn: row.isbn,
+      language: row.language,
+      cover_url: row.cover_url,
+      author: row.author,
+      created_at: row.created_at,
+      owners_count: (row.user_books?.[0] as { count: number } | undefined)?.count ?? 0,
+      commented_count:
+        (row.book_comments?.[0] as { count: number } | undefined)?.count ?? 0,
+    };
+  });
+}

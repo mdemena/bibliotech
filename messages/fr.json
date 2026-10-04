@@ -19,7 +19,8 @@
         "account": "Compte",
         "settings": "Paramètres",
         "total_books": "Total livres",
-        "admin": "Admin"
+        "admin": "Admin",
+        "users": "Utilisateurs"
     },
     "home": {
         "title": "Votre bibliothèque, parfaitement organisée.",
@@ -179,7 +180,8 @@
         "cancel": "Annuler",
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
-        "no_bio_description": "Sin biografía"
+        "no_bio_description": "Sin biografía",
+        "display_name_edit": "Modifier le nom d'utilisateur"
     },
     "book_detail": {
         "back": "Retour",
@@ -197,10 +199,38 @@
         "delete_comment": "Supprimer le commentaire"
     },
     "admin": {
-        "title": "Administration",
+        "title": "Titre",
         "subtitle": "Zone réservée aux administrateurs",
         "todo_master_data": "Gestion du catalogue maître de livres",
         "todo_users": "Gestion des utilisateurs et des rôles",
-        "todo_catalog": "Révision des données maîtresses"
+        "todo_catalog": "Révision des données maîtresses",
+        "admin_menu": "Panneau admin",
+        "admin_books": "Catalogue maître",
+        "admin_users": "Utilisateurs",
+        "catalog": "Livres au catalogue",
+        "owners_in_use": "Avec copies actives",
+        "users_count": "Utilisateurs inscrits",
+        "books_title": "Catalogue maître",
+        "books_subtitle": "Entretien du catalogue global de livres",
+        "add_book_master": "Nouveau livre",
+        "books_search": "Rechercher par titre ou ISBN...",
+        "author_col": "Auteur",
+        "owners_col": "Copies",
+        "comments_col": "Commentaires",
+        "actions_col": "Actions",
+        "no_catalog": "Aucun livre au catalogue",
+        "delete_catalog_title": "Supprimer du catalogue ?",
+        "delete_catalog_desc": "Le livre sera supprimé du catalogue global et, en cascade, les copies des utilisateurs. Action irréversible.",
+        "delete_catalog_confirm": "Supprimer livre + copies",
+        "cancel": "Annuler",
+        "invalid_form": "Formulaire invalide",
+        "invalid_role": "Rôle invalide",
+        "users_title": "Utilisateurs",
+        "users_subtitle": "Gestion des utilisateurs et rôles",
+        "users_search": "Rechercher...",
+        "users_col_name": "Utilisateur",
+        "col_role": "Rôle",
+        "users_col_books": "Livres",
+        "users_col_registered": "Inscription"
     }
 }

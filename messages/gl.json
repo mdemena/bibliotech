@@ -19,7 +19,8 @@
         "account": "Conta",
         "settings": "Axustes",
         "total_books": "Total libros",
-        "admin": "Administración"
+        "admin": "Administración",
+        "users": "Usuarios"
     },
     "home": {
         "title": "A túa biblioteca, perfectamente organizada.",
@@ -179,7 +180,8 @@
         "cancel": "Cancelar",
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
-        "no_bio_description": "Sin biografía"
+        "no_bio_description": "Sin biografía",
+        "display_name_edit": "Editar nome de usuario"
     },
     "book_detail": {
         "back": "Volver",
@@ -197,10 +199,38 @@
         "delete_comment": "Eliminar comentario"
     },
     "admin": {
-        "title": "Xestión",
+        "title": "Título",
         "subtitle": "Área reservada a administradores",
         "todo_master_data": "Xestión do catálogo mestre de libros",
         "todo_users": "Xestión de usuarios e roles",
-        "todo_catalog": "Revisión de datos mestres"
+        "todo_catalog": "Revisión de datos mestres",
+        "admin_menu": "Panel admin",
+        "admin_books": "Catálogo mestre",
+        "admin_users": "Usuarios",
+        "catalog": "Libros no catálogo",
+        "owners_in_use": "Con copias activas",
+        "users_count": "Usuarios rexistrados",
+        "books_title": "Catálogo mestre",
+        "books_subtitle": "Mantén o catálogo global de libros",
+        "add_book_master": "Novo libro",
+        "books_search": "Buscar por título ou ISBN...",
+        "author_col": "Autor",
+        "owners_col": "Copias",
+        "comments_col": "Comentarios",
+        "actions_col": "Accións",
+        "no_catalog": "Non hai libros no catálogo",
+        "delete_catalog_title": "Eliminar do catálogo?",
+        "delete_catalog_desc": "Eliminará o libro do catálogo global e, en cascada, as copias dos usuarios. Acción irreversible.",
+        "delete_catalog_confirm": "Eliminar libro + copias",
+        "cancel": "Cancelar",
+        "invalid_form": "Formulario inválido",
+        "invalid_role": "Rol inválido",
+        "users_title": "Usuarios",
+        "users_subtitle": "Xestión de usuarios rexistrados e roles",
+        "users_search": "Buscar usuario...",
+        "users_col_name": "Usuario",
+        "col_role": "Rol",
+        "users_col_books": "Libros",
+        "users_col_registered": "Rexisto"
     }
 }

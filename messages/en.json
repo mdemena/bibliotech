@@ -19,7 +19,8 @@
         "account": "Cuenta",
         "settings": "Ajustes",
         "total_books": "Total libros",
-        "admin": "Admin"
+        "admin": "Admin",
+        "users": "Users"
     },
     "home": {
         "title": "Your library, perfectly organized.",
@@ -179,7 +180,8 @@
         "cancel": "Cancelar",
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
-        "no_bio_description": "Sin biografía"
+        "no_bio_description": "Sin biografía",
+        "display_name_edit": "Edit username"
     },
     "book_detail": {
         "back": "Volver",
@@ -197,10 +199,38 @@
         "delete_comment": "Eliminar comentario"
     },
     "admin": {
-        "title": "Administration",
+        "title": "Title",
         "subtitle": "Admin-only area",
         "todo_master_data": "Manage the master book catalog",
         "todo_users": "Manage users and roles",
-        "todo_catalog": "Review master data"
+        "todo_catalog": "Review master data",
+        "admin_menu": "Admin panel",
+        "admin_books": "Master catalog",
+        "admin_users": "Users",
+        "catalog": "Books in catalog",
+        "owners_in_use": "With active copies",
+        "users_count": "Registered users",
+        "books_title": "Master catalog",
+        "books_subtitle": "Maintain the global book catalog (editing won't touch user copies)",
+        "add_book_master": "New book",
+        "books_search": "Search by title or ISBN...",
+        "author_col": "Author",
+        "owners_col": "Copies",
+        "comments_col": "Comments",
+        "actions_col": "Actions",
+        "no_catalog": "No books in the catalog",
+        "delete_catalog_title": "Delete from catalog?",
+        "delete_catalog_desc": "This removes the book from the global catalog and, in cascade, the copies of every user that had it. Irreversible.",
+        "delete_catalog_confirm": "Delete book + copies",
+        "cancel": "Cancel",
+        "invalid_form": "Invalid form",
+        "invalid_role": "Invalid role",
+        "users_title": "Users",
+        "users_subtitle": "Manage registered users and their roles",
+        "users_search": "Search user...",
+        "users_col_name": "User",
+        "col_role": "Role",
+        "users_col_books": "Books",
+        "users_col_registered": "Joined"
     }
 }

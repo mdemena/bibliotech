@@ -19,7 +19,8 @@
         "account": "Kontua",
         "settings": "Ezarpenak",
         "total_books": "Guztira liburuak",
-        "admin": "Administrazioa"
+        "admin": "Administrazioa",
+        "users": "Erabiltzaileak"
     },
     "home": {
         "title": "Zure liburutegia, hobekien antolatuta.",
@@ -179,7 +180,8 @@
         "cancel": "Utzi",
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
-        "no_bio_description": "Sin biografía"
+        "no_bio_description": "Sin biografía",
+        "display_name_edit": "Erabiltzaile izena editatu"
     },
     "book_detail": {
         "back": "Atzera",
@@ -197,10 +199,38 @@
         "delete_comment": "Iruzkina ezabatu"
     },
     "admin": {
-        "title": "Kudeaketa",
+        "title": "Izenburua",
         "subtitle": "Administratzaileentzako eremua",
         "todo_master_data": "Liburu nagusien katalogoa kudeatzea",
         "todo_users": "Erabiltzaileak eta rolak kudeatzea",
-        "todo_catalog": "Oinarrizko datuen berrikuspena"
+        "todo_catalog": "Oinarrizko datuen berrikuspena",
+        "admin_menu": "Admin panela",
+        "admin_books": "Katalogo nagusia",
+        "admin_users": "Erabiltzaileak",
+        "catalog": "Liburuak katalogoan",
+        "owners_in_use": "Kopiak dituztenak",
+        "users_count": "Erregistratutako erabiltzaileak",
+        "books_title": "Katalogo nagusia",
+        "books_subtitle": "Liburu katalogo globala mantendu",
+        "add_book_master": "Liburu berria",
+        "books_search": "Bilatu izenburu edo ISBN arabera...",
+        "author_col": "Egilea",
+        "owners_col": "Kopiak",
+        "comments_col": "Iruzkinak",
+        "actions_col": "Ekintzak",
+        "no_catalog": "Ez dago libururik katalogoan",
+        "delete_catalog_title": "Katalogotik ezabatu?",
+        "delete_catalog_desc": "Katalogo nagusitik ezabatuko da eta, katean, duen erabiltzaileen kopiak. Ekintza itzulezina.",
+        "delete_catalog_confirm": "Liburua + kopiak ezabatu",
+        "cancel": "Utzi",
+        "invalid_form": "Inprimaki baliogabea",
+        "invalid_role": "Rol baliogabea",
+        "users_title": "Erabiltzaileak",
+        "users_subtitle": "Erregistratutako erabiltzaileak eta rolak",
+        "users_search": "Bilatu erabiltzailea...",
+        "users_col_name": "Erabiltzailea",
+        "col_role": "Rol",
+        "users_col_books": "Liburuak",
+        "users_col_registered": "Erregistroa"
     }
 }

@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import {
   Home, Book, Users, MapPin, Menu, LogOut, ChevronsUpDown, Settings,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -47,9 +48,13 @@ export function AppShell({ user, role, children }: AppShellProps) {
     { label: t("locations"), href: "/locations", icon: MapPin },
   ];
 
-  if (role === "admin") {
-    navItems.push({ label: t("admin"), href: "/admin", icon: Settings });
-  }
+  const adminItems: NavItem[] = role === "admin"
+    ? [
+        { label: t("admin_menu"), href: "/admin", icon: Settings },
+        { label: t("admin_books"), href: "/admin/books", icon: ShieldCheck },
+        { label: t("admin_users"), href: "/admin/users", icon: Users },
+      ]
+    : [];
 
   const handleSignOut = () => startTransition(() => void signOut());
 
@@ -81,6 +86,32 @@ export function AppShell({ user, role, children }: AppShellProps) {
           );
         })}
       </nav>
+
+      {adminItems.length > 0 && (
+        <nav className="space-y-1 pt-6 mt-4 border-t border-gray-200 dark:border-gray-700">
+          <p className="px-4 pb-2 text-[10px] uppercase tracking-widest text-gray-400 font-bold">
+            {t("admin")}
+          </p>
+          {adminItems.map((item) => {
+            const isActive =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "nav-link group relative",
+                  isActive && "nav-link-active",
+                )}
+                onClick={() => setSidebarOpen(false)}
+              >
+                <item.icon size={20} className="mr-3 transition-transform group-hover:scale-110" />
+                <span className="relative z-10">{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      )}
 
       <div className="mt-auto space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
         <div className="px-4 py-2">
