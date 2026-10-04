@@ -91,6 +91,12 @@ src/
    páginas; añadir las keys a los 6 ficheros de `messages/*.json` (indentación de
    4 espacios, consistente con lo existente). Las keys nuevas se
    agregan a todos los locales, nunca solo a uno.
+   **Siempre que añadas UI o cambies textos**: revisa si harán falta literales
+   nuevos y añádelos TRADUCIDOS a los 6 idiomas (no es fallback ES). Antes de
+   commitear, pasa `npm run i18n:check` (scripts/check-i18n.mjs): escanea el
+   código y falla si falta alguna key en cualquier idioma. Los errores de
+   Supabase Auth se devuelven como claves i18n (src/lib/supabase/authErrors.ts),
+   no como mensajes crudos.
 5. **Auth**: las cookies de sesión las gestiona el middleware combinado; el
    matcher es `["/((?!api|_next|_vercel|.*\\..*).*)", "/"]` — si añades rutas
    nuevas en `app/`, no romper el regex (excluye `api` y ficheros con punto).

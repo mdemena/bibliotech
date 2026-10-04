@@ -20,7 +20,10 @@
         "settings": "Ajustes",
         "total_books": "Total libros",
         "admin": "Admin",
-        "users": "Users"
+        "users": "Users",
+        "admin_menu": "Admin panel",
+        "admin_books": "Master catalog",
+        "admin_users": "Users"
     },
     "home": {
         "title": "Your library, perfectly organized.",
@@ -76,7 +79,10 @@
         "passwords_no_match": "Passwords do not match",
         "password_min_length": "Password must be at least 6 characters",
         "invalid_form": "Formulario inválido",
-        "invalid_credentials": "Credenciales inválidas"
+        "invalid_credentials": "Credenciales inválidas",
+        "email_not_confirmed": "Email not confirmed: check your inbox",
+        "too_many_requests": "Too many attempts: wait a minute and try again",
+        "user_already_registered": "This email is already registered"
     },
     "dashboard": {
         "welcome": "Welcome",
@@ -119,7 +125,18 @@
         "no_authors": "No authors found.",
         "no_bio": "No bio available",
         "delete_confirm_title": "Delete author",
-        "delete_confirm_desc": "This action will permanently delete the author. Make sure they have no linked books if you have database restrictions."
+        "delete_confirm_desc": "This action will permanently delete the author. Make sure they have no linked books if you have database restrictions.",
+        "description_placeholder": "Optional details...",
+        "delete": null,
+        "cancel": "Cancelar",
+        "edit_author": "Edit Author",
+        "name": "Name",
+        "form_placeholder_author_name": "Ej: Gabriel García Márquez",
+        "nationality": "Nationality",
+        "bio": "Biography",
+        "bio_placeholder": "Brief author bio...",
+        "update": "Update",
+        "save": "Save"
     },
     "locations": {
         "title": "Location Management",
@@ -133,7 +150,15 @@
         "delete_confirm_desc": "This action will permanently delete the location. Make sure it contains no books.",
         "delete": "Eliminar todo",
         "cancel": "Cancelar",
-        "invalid_form": "Formulario inválido"
+        "invalid_form": "Formulario inválido",
+        "add_sublocation": null,
+        "edit_location": "Edit Location",
+        "inside_of": null,
+        "help": null,
+        "level_name": "Level Name",
+        "name_label": "Nombre",
+        "update": "Update",
+        "save": "Save"
     },
     "forms": {
         "edit_book": "Edit Book",
@@ -181,7 +206,36 @@
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía",
-        "display_name_edit": "Edit username"
+        "display_name_edit": "Edit username",
+        "subtitle": "Admin-only area",
+        "search_placeholder": null,
+        "no_authors": null,
+        "delete_confirm_title": null,
+        "delete_confirm_desc": null,
+        "delete": null,
+        "add_sublocation": null,
+        "no_locations": null,
+        "inside_of": null,
+        "help": null,
+        "books_title": "Master catalog",
+        "books_subtitle": "Maintain the global book catalog (editing won't touch user copies)",
+        "add_book_master": "New book",
+        "books_search": "Search by title or ISBN...",
+        "author_col": "Author",
+        "owners_col": "Copies",
+        "comments_col": "Comments",
+        "actions_col": "Actions",
+        "no_catalog": "No books in the catalog",
+        "delete_catalog_title": "Delete from catalog?",
+        "delete_catalog_desc": "This removes the book from the global catalog and, in cascade, the copies of every user that had it. Irreversible.",
+        "delete_catalog_confirm": "Delete book + copies",
+        "users_title": "Users",
+        "users_subtitle": "Manage registered users and their roles",
+        "users_search": "Search user...",
+        "users_col_name": "User",
+        "col_role": "Role",
+        "users_col_books": "Books",
+        "users_col_registered": "Joined"
     },
     "book_detail": {
         "back": "Volver",
@@ -196,7 +250,8 @@
         "comment_placeholder": "Escribe tu impresión sobre el libro...",
         "no_comments": "Sin comentarios todavía",
         "your_comment": "Tu comentario",
-        "delete_comment": "Eliminar comentario"
+        "delete_comment": "Eliminar comentario",
+        "no_language": null
     },
     "admin": {
         "title": "Title",
@@ -231,6 +286,16 @@
         "users_col_name": "User",
         "col_role": "Role",
         "users_col_books": "Books",
-        "users_col_registered": "Joined"
+        "users_col_registered": "Joined",
+        "edit_book": "Edit Book",
+        "add_book": "Add New Book",
+        "author": "Author",
+        "language": "Language",
+        "cover_url": "Cover (URL)",
+        "cover_placeholder": "https://example.com/cover.jpg",
+        "update": "Update",
+        "save": "Save",
+        "display_name_edit": "Edit username",
+        "name": "Name"
     }
 }

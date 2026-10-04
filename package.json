@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "vapid": "node scripts/generate-vapid.mjs",
-    "push-demo": "echo \"curl -X POST http://localhost:3000/api/push/send\""
+    "push-demo": "echo \"curl -X POST http://localhost:3000/api/push/send\"",
+    "i18n:check": "node scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",

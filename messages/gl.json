@@ -20,7 +20,10 @@
         "settings": "Axustes",
         "total_books": "Total libros",
         "admin": "Administración",
-        "users": "Usuarios"
+        "users": "Usuarios",
+        "admin_menu": "Panel admin",
+        "admin_books": "Catálogo mestre",
+        "admin_users": "Usuarios"
     },
     "home": {
         "title": "A túa biblioteca, perfectamente organizada.",
@@ -76,7 +79,10 @@
         "passwords_no_match": "Os contrasinais non coinciden",
         "password_min_length": "O contrasinal debe ter polo menos 6 caracteres",
         "invalid_form": "Formulario inválido",
-        "invalid_credentials": "Credenciales inválidas"
+        "invalid_credentials": "Credenciales inválidas",
+        "email_not_confirmed": "Correo non confirmado: revisa a túa caixa de entrada",
+        "too_many_requests": "Demasiados intentos: espera un minuto e volve probalo",
+        "user_already_registered": "Este correo xa está rexistrado"
     },
     "dashboard": {
         "welcome": "Benvido",
@@ -119,7 +125,18 @@
         "no_authors": "Non se atoparon autores.",
         "no_bio": "Sen biografía",
         "delete_confirm_title": "Eliminar autor",
-        "delete_confirm_desc": "Esta acción eliminará permanentemente ao autor. Asegúrate de que non teña libros vinculados."
+        "delete_confirm_desc": "Esta acción eliminará permanentemente ao autor. Asegúrate de que non teña libros vinculados.",
+        "description_placeholder": "Detalles opcionais...",
+        "delete": null,
+        "cancel": "Cancelar",
+        "edit_author": "Editar Autor",
+        "name": "Nome",
+        "form_placeholder_author_name": "Ej: Gabriel García Márquez",
+        "nationality": "Nacionalidade",
+        "bio": "Biografía",
+        "bio_placeholder": "Breve biografía do autor...",
+        "update": "Actualizar",
+        "save": "Gardar"
     },
     "locations": {
         "title": "Xestión de Ubicacións",
@@ -133,7 +150,15 @@
         "delete_confirm_desc": "Esta acción eliminará permanentemente a identificación. Asegúrate de que non conteña libros.",
         "delete": "Eliminar todo",
         "cancel": "Cancelar",
-        "invalid_form": "Formulario inválido"
+        "invalid_form": "Formulario inválido",
+        "add_sublocation": null,
+        "edit_location": "Editar Ubicación",
+        "inside_of": null,
+        "help": null,
+        "level_name": "Nome do nivel",
+        "name_label": "Nombre",
+        "update": "Actualizar",
+        "save": "Gardar"
     },
     "forms": {
         "edit_book": "Editar Libro",
@@ -181,7 +206,36 @@
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía",
-        "display_name_edit": "Editar nome de usuario"
+        "display_name_edit": "Editar nome de usuario",
+        "subtitle": "Área reservada a administradores",
+        "search_placeholder": null,
+        "no_authors": null,
+        "delete_confirm_title": null,
+        "delete_confirm_desc": null,
+        "delete": null,
+        "add_sublocation": null,
+        "no_locations": null,
+        "inside_of": null,
+        "help": null,
+        "books_title": "Catálogo mestre",
+        "books_subtitle": "Mantén o catálogo global de libros",
+        "add_book_master": "Novo libro",
+        "books_search": "Buscar por título ou ISBN...",
+        "author_col": "Autor",
+        "owners_col": "Copias",
+        "comments_col": "Comentarios",
+        "actions_col": "Accións",
+        "no_catalog": "Non hai libros no catálogo",
+        "delete_catalog_title": "Eliminar do catálogo?",
+        "delete_catalog_desc": "Eliminará o libro do catálogo global e, en cascada, as copias dos usuarios. Acción irreversible.",
+        "delete_catalog_confirm": "Eliminar libro + copias",
+        "users_title": "Usuarios",
+        "users_subtitle": "Xestión de usuarios rexistrados e roles",
+        "users_search": "Buscar usuario...",
+        "users_col_name": "Usuario",
+        "col_role": "Rol",
+        "users_col_books": "Libros",
+        "users_col_registered": "Rexisto"
     },
     "book_detail": {
         "back": "Volver",
@@ -196,7 +250,8 @@
         "comment_placeholder": "Escribe a túa impresión sobre o libro...",
         "no_comments": "Sen comentarios aínda",
         "your_comment": "O teu comentario",
-        "delete_comment": "Eliminar comentario"
+        "delete_comment": "Eliminar comentario",
+        "no_language": null
     },
     "admin": {
         "title": "Título",
@@ -231,6 +286,16 @@
         "users_col_name": "Usuario",
         "col_role": "Rol",
         "users_col_books": "Libros",
-        "users_col_registered": "Rexisto"
+        "users_col_registered": "Rexisto",
+        "edit_book": "Editar Libro",
+        "add_book": "Engadir Novo Libro",
+        "author": "Autor",
+        "language": "Idioma",
+        "cover_url": "Portada (URL)",
+        "cover_placeholder": "https://exemplo.com/portada.jpg",
+        "update": "Actualizar",
+        "save": "Gardar",
+        "display_name_edit": "Editar nome de usuario",
+        "name": "Nome"
     }
 }

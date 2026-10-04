@@ -20,7 +20,10 @@
         "settings": "Ezarpenak",
         "total_books": "Guztira liburuak",
         "admin": "Administrazioa",
-        "users": "Erabiltzaileak"
+        "users": "Erabiltzaileak",
+        "admin_menu": "Admin panela",
+        "admin_books": "Katalogo nagusia",
+        "admin_users": "Erabiltzaileak"
     },
     "home": {
         "title": "Zure liburutegia, hobekien antolatuta.",
@@ -76,7 +79,10 @@
         "passwords_no_match": "Pasahitzak ez datoz bat",
         "password_min_length": "Pasahitzak gutxienez 6 karaktere izan behar ditu",
         "invalid_form": "Inprimaki baliogabea",
-        "invalid_credentials": "Credenciales inválidas"
+        "invalid_credentials": "Credenciales inválidas",
+        "email_not_confirmed": "Mezua ez da berretsi: begiratu sarrerako ontzian",
+        "too_many_requests": "Saiakera gehiegi: itxaron minutu bat eta saiatu berriro",
+        "user_already_registered": "Mezu hau jada erregistratuta dago"
     },
     "dashboard": {
         "welcome": "Ongi etorri",
@@ -119,7 +125,18 @@
         "no_authors": "Ez da egilerik aurkitu.",
         "no_bio": "Biografiarik gabe",
         "delete_confirm_title": "Ezabatu egilea",
-        "delete_confirm_desc": "Ekintza honek egilea betiko ezabatuko du. Ziurtatu ez duela lotutako libururik."
+        "delete_confirm_desc": "Ekintza honek egilea betiko ezabatuko du. Ziurtatu ez duela lotutako libururik.",
+        "description_placeholder": "Aukerako xehetasunak...",
+        "delete": null,
+        "cancel": "Utzi",
+        "edit_author": "Editatu Egilea",
+        "name": "Izena",
+        "form_placeholder_author_name": "Ej: Gabriel García Márquez",
+        "nationality": "Nazionalitatea",
+        "bio": "Biografia",
+        "bio_placeholder": "Egilearen biografia laburra...",
+        "update": "Eguneratu",
+        "save": "Gorde"
     },
     "locations": {
         "title": "Kokalekuen Kudeaketa",
@@ -133,7 +150,15 @@
         "delete_confirm_desc": "Ekintza honek kokalekua betiko ezabatuko du. Ziurtatu ez duela libururik barnean.",
         "delete": "Dena ezabatu",
         "cancel": "Utzi",
-        "invalid_form": "Inprimaki baliogabea"
+        "invalid_form": "Inprimaki baliogabea",
+        "add_sublocation": null,
+        "edit_location": "Editatu Kokalekua",
+        "inside_of": null,
+        "help": null,
+        "level_name": "Mailaren izena",
+        "name_label": "Nombre",
+        "update": "Eguneratu",
+        "save": "Gorde"
     },
     "forms": {
         "edit_book": "Editatu Liburua",
@@ -181,7 +206,36 @@
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía",
-        "display_name_edit": "Erabiltzaile izena editatu"
+        "display_name_edit": "Erabiltzaile izena editatu",
+        "subtitle": "Administratzaileentzako eremua",
+        "search_placeholder": null,
+        "no_authors": null,
+        "delete_confirm_title": null,
+        "delete_confirm_desc": null,
+        "delete": null,
+        "add_sublocation": null,
+        "no_locations": null,
+        "inside_of": null,
+        "help": null,
+        "books_title": "Katalogo nagusia",
+        "books_subtitle": "Liburu katalogo globala mantendu",
+        "add_book_master": "Liburu berria",
+        "books_search": "Bilatu izenburu edo ISBN arabera...",
+        "author_col": "Egilea",
+        "owners_col": "Kopiak",
+        "comments_col": "Iruzkinak",
+        "actions_col": "Ekintzak",
+        "no_catalog": "Ez dago libururik katalogoan",
+        "delete_catalog_title": "Katalogotik ezabatu?",
+        "delete_catalog_desc": "Katalogo nagusitik ezabatuko da eta, katean, duen erabiltzaileen kopiak. Ekintza itzulezina.",
+        "delete_catalog_confirm": "Liburua + kopiak ezabatu",
+        "users_title": "Erabiltzaileak",
+        "users_subtitle": "Erregistratutako erabiltzaileak eta rolak",
+        "users_search": "Bilatu erabiltzailea...",
+        "users_col_name": "Erabiltzailea",
+        "col_role": "Rol",
+        "users_col_books": "Liburuak",
+        "users_col_registered": "Erregistroa"
     },
     "book_detail": {
         "back": "Atzera",
@@ -196,7 +250,8 @@
         "comment_placeholder": "Liburuaren gaineko zure iritzia idatzi...",
         "no_comments": "Iruzkinik ez oraindik",
         "your_comment": "Zure iruzkina",
-        "delete_comment": "Iruzkina ezabatu"
+        "delete_comment": "Iruzkina ezabatu",
+        "no_language": null
     },
     "admin": {
         "title": "Izenburua",
@@ -231,6 +286,16 @@
         "users_col_name": "Erabiltzailea",
         "col_role": "Rol",
         "users_col_books": "Liburuak",
-        "users_col_registered": "Erregistroa"
+        "users_col_registered": "Erregistroa",
+        "edit_book": "Editatu Liburua",
+        "add_book": "Gehitu Liburu Berria",
+        "author": "Egilea",
+        "language": "Hizkuntza",
+        "cover_url": "Azala (URL)",
+        "cover_placeholder": "https://adibidea.com/azala.jpg",
+        "update": "Eguneratu",
+        "save": "Gorde",
+        "display_name_edit": "Erabiltzaile izena editatu",
+        "name": "Izena"
     }
 }

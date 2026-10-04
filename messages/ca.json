@@ -20,7 +20,10 @@
         "settings": "Ajustos",
         "total_books": "Total llibres",
         "admin": "Admin",
-        "users": "Usuaris"
+        "users": "Usuaris",
+        "admin_menu": "Panell admin",
+        "admin_books": "Catàleg mestre",
+        "admin_users": "Usuaris"
     },
     "home": {
         "title": "La teva biblioteca, perfectament organitzada.",
@@ -76,7 +79,10 @@
         "passwords_no_match": "Les contrasenyes no coincideixen",
         "password_min_length": "La contrasenya ha de tenir almenys 6 caràcters",
         "invalid_form": "Formulari invàlid",
-        "invalid_credentials": "Credenciales inválidas"
+        "invalid_credentials": "Credenciales inválidas",
+        "email_not_confirmed": "Correu no confirmat: revisa la teva safata d'entrada",
+        "too_many_requests": "Massa intents: espera un minut i torna-ho a provar",
+        "user_already_registered": "Aquest correu ja està registrat"
     },
     "dashboard": {
         "welcome": "Benvingut",
@@ -119,7 +125,18 @@
         "no_authors": "No s'han trobat autors.",
         "no_bio": "Sense biografia",
         "delete_confirm_title": "Eliminar autor",
-        "delete_confirm_desc": "Aquesta acció eliminarà permanentment l'autor. Assegura't que no tingui llibres vinculats."
+        "delete_confirm_desc": "Aquesta acció eliminarà permanentment l'autor. Assegura't que no tingui llibres vinculats.",
+        "description_placeholder": "Detalls opcionals...",
+        "delete": null,
+        "cancel": "Cancel·la",
+        "edit_author": "Edita Autor",
+        "name": "Nom",
+        "form_placeholder_author_name": "Ej: Gabriel García Márquez",
+        "nationality": "Nacionalitat",
+        "bio": "Biografia",
+        "bio_placeholder": "Breu biografia de l'autor...",
+        "update": "Actualitza",
+        "save": "Desa"
     },
     "locations": {
         "title": "Gestió d'Ubicacions",
@@ -133,7 +150,15 @@
         "delete_confirm_desc": "Aquesta acció eliminarà permanentment la ubicació. Assegura't que no contingui llibres.",
         "delete": "Elimina-ho tot",
         "cancel": "Cancel·la",
-        "invalid_form": "Formulari invàlid"
+        "invalid_form": "Formulari invàlid",
+        "add_sublocation": null,
+        "edit_location": "Edita Ubicació",
+        "inside_of": null,
+        "help": null,
+        "level_name": "Nom del nivell",
+        "name_label": "Nombre",
+        "update": "Actualitza",
+        "save": "Desa"
     },
     "forms": {
         "edit_book": "Edita Llibre",
@@ -181,7 +206,36 @@
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía",
-        "display_name_edit": "Edició del nom d'usuari"
+        "display_name_edit": "Edició del nom d'usuari",
+        "subtitle": "Àrea reservada a administradors",
+        "search_placeholder": null,
+        "no_authors": null,
+        "delete_confirm_title": null,
+        "delete_confirm_desc": null,
+        "delete": null,
+        "add_sublocation": null,
+        "no_locations": null,
+        "inside_of": null,
+        "help": null,
+        "books_title": "Catàleg mestre",
+        "books_subtitle": "Manté el catàleg global de llibres",
+        "add_book_master": "Nou llibre",
+        "books_search": "Cercar per títol o ISBN...",
+        "author_col": "Autor",
+        "owners_col": "Còpies",
+        "comments_col": "Comentaris",
+        "actions_col": "Accions",
+        "no_catalog": "No hi ha llibres al catàleg",
+        "delete_catalog_title": "Eliminar del catàleg?",
+        "delete_catalog_desc": "S'eliminarà el llibre del catàleg global i, en cascada, les còpies dels usuaris. Acció irreversible.",
+        "delete_catalog_confirm": "Eliminar llibre + còpies",
+        "users_title": "Usuaris",
+        "users_subtitle": "Gestió d'usuaris registrats i rols",
+        "users_search": "Cercar usuari...",
+        "users_col_name": "Usuari",
+        "col_role": "Rol",
+        "users_col_books": "Llibres",
+        "users_col_registered": "Registre"
     },
     "book_detail": {
         "back": "Tornar",
@@ -196,7 +250,8 @@
         "comment_placeholder": "Escriu la teva impressió sobre el llibre...",
         "no_comments": "Encara no hi ha comentaris",
         "your_comment": "El teu comentari",
-        "delete_comment": "Elimina el comentari"
+        "delete_comment": "Elimina el comentari",
+        "no_language": null
     },
     "admin": {
         "title": "Títol",
@@ -231,6 +286,16 @@
         "users_col_name": "Usuari",
         "col_role": "Rol",
         "users_col_books": "Llibres",
-        "users_col_registered": "Registre"
+        "users_col_registered": "Registre",
+        "edit_book": "Edita Llibre",
+        "add_book": "Afegeix Nou Llibre",
+        "author": "Autor",
+        "language": "Idioma",
+        "cover_url": "Portada (URL)",
+        "cover_placeholder": "https://exemple.com/portada.jpg",
+        "update": "Actualitza",
+        "save": "Desa",
+        "display_name_edit": "Edició del nom d'usuari",
+        "name": "Nom"
     }
 }

@@ -20,7 +20,10 @@
         "settings": "Paramètres",
         "total_books": "Total livres",
         "admin": "Admin",
-        "users": "Utilisateurs"
+        "users": "Utilisateurs",
+        "admin_menu": "Panneau admin",
+        "admin_books": "Catalogue maître",
+        "admin_users": "Utilisateurs"
     },
     "home": {
         "title": "Votre bibliothèque, parfaitement organisée.",
@@ -76,7 +79,10 @@
         "passwords_no_match": "Les mots de passe ne correspondent pas",
         "password_min_length": "Le mot de passe doit comporter au moins 6 caractères",
         "invalid_form": "Formulaire invalide",
-        "invalid_credentials": "Credenciales inválidas"
+        "invalid_credentials": "Credenciales inválidas",
+        "email_not_confirmed": "E-mail non confirmé : vérifie ta boîte de réception",
+        "too_many_requests": "Trop de tentatives : attends une minute et réessaie",
+        "user_already_registered": "Cet e-mail est déjà enregistré"
     },
     "dashboard": {
         "welcome": "Bienvenue",
@@ -119,7 +125,18 @@
         "no_authors": "Aucun auteur trouvé.",
         "no_bio": "Pas de biographie",
         "delete_confirm_title": "Supprimer l'auteur",
-        "delete_confirm_desc": "Cette action supprimera définitivement l'auteur. Assurez-vous qu'il n'a pas de livres liés."
+        "delete_confirm_desc": "Cette action supprimera définitivement l'auteur. Assurez-vous qu'il n'a pas de livres liés.",
+        "description_placeholder": "Détails optionnels...",
+        "delete": null,
+        "cancel": "Annuler",
+        "edit_author": "Modifier l'Auteur",
+        "name": "Nom",
+        "form_placeholder_author_name": "Ej: Gabriel García Márquez",
+        "nationality": "Nationalité",
+        "bio": "Biographie",
+        "bio_placeholder": "Brève biographie de l'auteur...",
+        "update": "Mettre à jour",
+        "save": "Enregistrer"
     },
     "locations": {
         "title": "Gestion des Emplacements",
@@ -133,7 +150,15 @@
         "delete_confirm_desc": "Cette action supprimera définitivement l'emplacement. Assurez-vous qu'il ne contient pas de livres.",
         "delete": "Tout supprimer",
         "cancel": "Annuler",
-        "invalid_form": "Formulaire invalide"
+        "invalid_form": "Formulaire invalide",
+        "add_sublocation": null,
+        "edit_location": "Modifier l'Emplacement",
+        "inside_of": null,
+        "help": null,
+        "level_name": "Nom du niveau",
+        "name_label": "Nombre",
+        "update": "Mettre à jour",
+        "save": "Enregistrer"
     },
     "forms": {
         "edit_book": "Modifier le Livre",
@@ -181,7 +206,36 @@
         "name_label": "Nombre",
         "form_placeholder_author_name": "Ej: Gabriel García Márquez",
         "no_bio_description": "Sin biografía",
-        "display_name_edit": "Modifier le nom d'utilisateur"
+        "display_name_edit": "Modifier le nom d'utilisateur",
+        "subtitle": "Zone réservée aux administrateurs",
+        "search_placeholder": null,
+        "no_authors": null,
+        "delete_confirm_title": null,
+        "delete_confirm_desc": null,
+        "delete": null,
+        "add_sublocation": null,
+        "no_locations": null,
+        "inside_of": null,
+        "help": null,
+        "books_title": "Catalogue maître",
+        "books_subtitle": "Entretien du catalogue global de livres",
+        "add_book_master": "Nouveau livre",
+        "books_search": "Rechercher par titre ou ISBN...",
+        "author_col": "Auteur",
+        "owners_col": "Copies",
+        "comments_col": "Commentaires",
+        "actions_col": "Actions",
+        "no_catalog": "Aucun livre au catalogue",
+        "delete_catalog_title": "Supprimer du catalogue ?",
+        "delete_catalog_desc": "Le livre sera supprimé du catalogue global et, en cascade, les copies des utilisateurs. Action irréversible.",
+        "delete_catalog_confirm": "Supprimer livre + copies",
+        "users_title": "Utilisateurs",
+        "users_subtitle": "Gestion des utilisateurs et rôles",
+        "users_search": "Rechercher...",
+        "users_col_name": "Utilisateur",
+        "col_role": "Rôle",
+        "users_col_books": "Livres",
+        "users_col_registered": "Inscription"
     },
     "book_detail": {
         "back": "Retour",
@@ -196,7 +250,8 @@
         "comment_placeholder": "Écris tes impressions sur le livre...",
         "no_comments": "Aucun commentaire pour le moment",
         "your_comment": "Ton commentaire",
-        "delete_comment": "Supprimer le commentaire"
+        "delete_comment": "Supprimer le commentaire",
+        "no_language": null
     },
     "admin": {
         "title": "Titre",
@@ -231,6 +286,16 @@
         "users_col_name": "Utilisateur",
         "col_role": "Rôle",
         "users_col_books": "Livres",
-        "users_col_registered": "Inscription"
+        "users_col_registered": "Inscription",
+        "edit_book": "Modifier le Livre",
+        "add_book": "Ajouter un Nouveau Livre",
+        "author": "Auteur",
+        "language": "Langue",
+        "cover_url": "Couverture (URL)",
+        "cover_placeholder": "https://exemple.com/couverture.jpg",
+        "update": "Mettre à jour",
+        "save": "Enregistrer",
+        "display_name_edit": "Modifier le nom d'utilisateur",
+        "name": "Nom"
     }
 }

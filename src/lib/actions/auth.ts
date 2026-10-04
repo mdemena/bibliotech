@@ -4,6 +4,7 @@ import { z } from "zod";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { supabaseServerClient } from "@/lib/supabase/server";
+import { authErrorToKey } from "@/lib/supabase/authErrors";
 import type { FormState } from "@/lib/forms";
 
 const signInSchema = z.object({
@@ -36,7 +37,7 @@ export async function signIn(
   const supabase = await supabaseServerClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-  if (error) return { error: error.message };
+  if (error) return { error: authErrorToKey(error) };
 
   redirect("/dashboard");
 }
@@ -64,7 +65,7 @@ export async function signUp(
     options: { data: { display_name } },
   });
 
-  if (error) return { error: error.message };
+  if (error) return { error: authErrorToKey(error) };
   if (data.user) redirect("/login");
   return { error: null };
 }
