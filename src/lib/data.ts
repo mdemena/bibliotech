@@ -181,17 +181,31 @@ export async function fetchCatalog(
 ): Promise<CatalogBookRow[]> {
   const supabase = await supabaseServerClient();
 
-  let select = supabase
+  const select = supabase
     .from("books")
-    .select("*, author:authors(*), user_books(count), book_comments(count)")
+    .select("*, author:authors(*)")
     .order("created_at", { ascending: false });
 
-  if (query) {
-    select = select.ilike("title", `%${query}%`);
-  }
-
-  const { data, error } = await select;
+  const filters = query ? select.ilike("title", `%${query}%`) : select;
+  const { data, error } = await filters;
   if (error) throw error;
+
+  // Los comentarios cuelgan de user_books (no de books): los contamos aparte.
+  const [entriesRes, commentsRes] = await Promise.all([
+    supabase.from("user_books").select("book_id"),
+    supabase.from("book_comments").select("book_id"),
+  ]);
+  if (entriesRes.error) throw entriesRes.error;
+  if (commentsRes.error) throw commentsRes.error;
+
+  const ownersCount = new Map<string, number>();
+  for (const e of (entriesRes.data ?? []) as { book_id: string }[]) {
+    ownersCount.set(e.book_id, (ownersCount.get(e.book_id) ?? 0) + 1);
+  }
+  const commentsCount = new Map<string, number>();
+  for (const c of (commentsRes.data ?? []) as { book_id: string }[]) {
+    commentsCount.set(c.book_id, (commentsCount.get(c.book_id) ?? 0) + 1);
+  }
 
   return (data ?? []).map((b) => {
     const row = b as unknown as {
@@ -202,8 +216,6 @@ export async function fetchCatalog(
       cover_url: string | null;
       author: Author | null;
       created_at: string;
-      user_books: [{ count: number }] | [];
-      book_comments: [{ count: number }] | [];
     };
     return {
       id: row.id,
@@ -213,9 +225,8 @@ export async function fetchCatalog(
       cover_url: row.cover_url,
       author: row.author,
       created_at: row.created_at,
-      owners_count: (row.user_books?.[0] as { count: number } | undefined)?.count ?? 0,
-      commented_count:
-        (row.book_comments?.[0] as { count: number } | undefined)?.count ?? 0,
+      owners_count: ownersCount.get(row.id) ?? 0,
+      commented_count: commentsCount.get(row.id) ?? 0,
     };
   });
 }
