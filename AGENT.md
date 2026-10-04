@@ -131,7 +131,9 @@ src/
   `getUserRole()`/`isAdmin()` en `src/lib/auth.ts`, helper SQL `public.is_admin()`.
 - Área admin en `/[locale]/admin`: guard por layout (no-admin → dashboard) y
   placeholder pendiente de funcionalidades reales (catálogo maestro, usuarios).
-  En la UI, el enlace Admin solo aparece a admins.
+  Punto de entrada único: /dashboard renderiza la vista de usuario o, a admins,
+  la pestaña de accesos de gestión encima de su colección; el menú también
+  cambia según rol. En la UI, el enlace Admin solo aparece a admins.
   Al editar un libro, un usuario normal solo cambia su copia (user_books);
   el catálogo global (`books`) solo lo edita un admin.
 
