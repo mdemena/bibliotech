@@ -8,19 +8,7 @@ import { useLocale } from "next-intl";
 import { saveUserLocale } from "@/lib/actions/auth";
 import { cn } from "@/lib/utils";
 
-interface Language {
-  code: string;
-  name: string;
-}
-
-const languages: Language[] = [
-  { code: "es", name: "Español" },
-  { code: "ca", name: "Català" },
-  { code: "gl", name: "Galego" },
-  { code: "eu", name: "Euskara" },
-  { code: "en", name: "English" },
-  { code: "fr", name: "Français" },
-];
+import { languages } from "@/lib/languages";
 
 /** Banderas como SVG inline (los emojis de bandera no renderizan igual en todos los SO). */
 function Flag({ code, size = 20 }: { code: string; size?: number }) {

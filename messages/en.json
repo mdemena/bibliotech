@@ -23,7 +23,8 @@
         "users": "Users",
         "admin_menu": "Admin panel",
         "admin_books": "Master catalog",
-        "admin_users": "Users"
+        "admin_users": "Users",
+        "profile": "Profile"
     },
     "home": {
         "title": "Your library, perfectly organized.",
@@ -297,5 +298,18 @@
         "save": "Save",
         "display_name_edit": "Edit username",
         "name": "Name"
+    },
+    "profile": {
+        "title": "My profile",
+        "subtitle": "Manage your personal data: name, surname, birth date and language",
+        "first_name": "Name",
+        "last_name": "Surname",
+        "birth_date": "Birth date",
+        "optional": "optional",
+        "saved": "Data saved correctly",
+        "invalid_form": "Invalid form",
+        "display_name": "Display name",
+        "display_hint": "Shown at the top bar",
+        "save": "Save"
     }
 }

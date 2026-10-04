@@ -23,7 +23,8 @@
         "users": "Usuaris",
         "admin_menu": "Panell admin",
         "admin_books": "Catàleg mestre",
-        "admin_users": "Usuaris"
+        "admin_users": "Usuaris",
+        "profile": "Perfil"
     },
     "home": {
         "title": "La teva biblioteca, perfectament organitzada.",
@@ -297,5 +298,18 @@
         "save": "Desa",
         "display_name_edit": "Edició del nom d'usuari",
         "name": "Nom"
+    },
+    "profile": {
+        "title": "El meu perfil",
+        "subtitle": "Gestiona les teves dades personals: nom, cognom, data de naixement i idioma",
+        "first_name": "Nom",
+        "last_name": "Cognoms",
+        "birth_date": "Data de naixement",
+        "optional": "opcional",
+        "saved": "Dades desades correctament",
+        "invalid_form": "Formulari invàlid",
+        "display_name": "Nom visible",
+        "display_hint": "És el nom que es mostra a la barra superior",
+        "save": "Desa"
     }
 }

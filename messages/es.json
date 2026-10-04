@@ -23,7 +23,8 @@
         "users": "Usuarios",
         "admin_menu": "Panel admin",
         "admin_books": "Catálogo maestro",
-        "admin_users": "Usuarios"
+        "admin_users": "Usuarios",
+        "profile": "Perfil"
     },
     "home": {
         "title": "Tu biblioteca, perfectamente organizada.",
@@ -297,5 +298,18 @@
         "save": "Guardar",
         "display_name_edit": "Editar nombre de usuario",
         "name": "Nombre"
+    },
+    "profile": {
+        "title": "Mi perfil",
+        "subtitle": "Gestiona tus datos personales: nombre, apellido, fecha de nacimiento e idioma",
+        "first_name": "Nombre",
+        "last_name": "Apellidos",
+        "birth_date": "Fecha de nacimiento",
+        "optional": "opcional",
+        "saved": "Datos guardados correctamente",
+        "invalid_form": "Formulario inválido",
+        "display_name": "Nombre visible",
+        "display_hint": "Es el nombre que se muestra en la barra superior",
+        "save": "Guardar"
     }
 }

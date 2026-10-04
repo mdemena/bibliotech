@@ -14,7 +14,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/lib/actions/auth";
@@ -189,10 +188,10 @@ export function AppShell({ user, role, children }: AppShellProps) {
                     </p>
                     <p className="text-xs text-gray-500 truncate">{user.email}</p>
                   </div>
-                  <DropdownMenuItem className="dropdown-item cursor-pointer opacity-50 pointer-events-none">
+                  <Link href="/profile" className="dropdown-item cursor-pointer">
                     <Settings size={16} className="mr-3" />
-                    {t("settings")}
-                  </DropdownMenuItem>
+                    {t("profile")}
+                  </Link>
                   <button
                     className="dropdown-item text-red-600 dark:text-red-400 cursor-pointer"
                     onClick={handleSignOut}

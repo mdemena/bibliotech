@@ -23,7 +23,8 @@
         "users": "Utilisateurs",
         "admin_menu": "Panneau admin",
         "admin_books": "Catalogue maître",
-        "admin_users": "Utilisateurs"
+        "admin_users": "Utilisateurs",
+        "profile": "Profil"
     },
     "home": {
         "title": "Votre bibliothèque, parfaitement organisée.",
@@ -297,5 +298,18 @@
         "save": "Enregistrer",
         "display_name_edit": "Modifier le nom d'utilisateur",
         "name": "Nom"
+    },
+    "profile": {
+        "title": "Mon profil",
+        "subtitle": "Gère tes données personnelles : prénom, nom, date de naissance et langue",
+        "first_name": "Prénom",
+        "last_name": "Nom",
+        "birth_date": "Date de naissance",
+        "optional": "optionnel",
+        "saved": "Données enregistrées avec succès",
+        "invalid_form": "Formulaire invalide",
+        "display_name": "Nom affiché",
+        "display_hint": "C'est le nom affiché dans la barre supérieure",
+        "save": "Enregistrer"
     }
 }

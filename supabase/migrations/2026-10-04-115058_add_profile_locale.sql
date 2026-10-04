@@ -8,4 +8,4 @@
 ALTER TABLE profiles
   ADD COLUMN IF NOT EXISTS locale TEXT
   CHECK (locale IS NULL OR locale IN ('es', 'en', 'ca', 'gl', 'eu', 'fr'))
-  DEFAULT NULL;
+  DEFAULT 'es';

@@ -23,7 +23,8 @@
         "users": "Erabiltzaileak",
         "admin_menu": "Admin panela",
         "admin_books": "Katalogo nagusia",
-        "admin_users": "Erabiltzaileak"
+        "admin_users": "Erabiltzaileak",
+        "profile": "Profila"
     },
     "home": {
         "title": "Zure liburutegia, hobekien antolatuta.",
@@ -297,5 +298,18 @@
         "save": "Gorde",
         "display_name_edit": "Erabiltzaile izena editatu",
         "name": "Izena"
+    },
+    "profile": {
+        "title": "Nire profila",
+        "subtitle": "Kudeatu zure datu pertsonalak: izena, abizenak, jaiotze-data eta hizkuntza",
+        "first_name": "Izena",
+        "last_name": "Abizenak",
+        "birth_date": "Jaiotze-data",
+        "optional": "aukerakoa",
+        "saved": "Datuak ondo gordeta",
+        "invalid_form": "Inprimaki baliogabea",
+        "display_name": "Bistaratutako izena",
+        "display_hint": "Goiko barran agertzen den izena da",
+        "save": "Gorde"
     }
 }
