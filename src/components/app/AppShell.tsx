@@ -5,7 +5,7 @@ import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import {
   Home, Book, Users, MapPin, Menu, LogOut, Settings, UserCircle,
-  ShieldCheck, type LucideIcon,
+  ShieldCheck, MessageSquare, Library, type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -48,9 +48,11 @@ export function AppShell({ user, role, children }: AppShellProps) {
 
   const adminItems: NavItem[] = role === "admin"
     ? [
-        { label: t("admin_menu"), href: "/admin", icon: Settings },
-        { label: t("admin_books"), href: "/admin/books", icon: ShieldCheck },
-        { label: t("admin_users"), href: "/admin/users", icon: Users },
+        { label: t("admin_books"), href: "/admin/books", icon: Book },
+        { label: t("admin_authors"), href: "/admin/authors", icon: Library },
+        { label: t("admin_comments"), href: "/admin/comments", icon: MessageSquare },
+        { label: t("admin_users"), href: "/admin/users", icon: ShieldCheck },
+        { label: t("admin_collections"), href: "/admin/collections", icon: MapPin },
       ]
     : [];
 

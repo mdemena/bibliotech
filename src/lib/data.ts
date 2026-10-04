@@ -230,3 +230,123 @@ export async function fetchCatalog(
     };
   });
 }
+
+// ----------------------------------------
+// Moderación admin: comentarios y colecciones
+// ----------------------------------------
+
+export interface AdminCommentRow {
+  id: string;
+  comment: string;
+  created_at: string;
+  user_name: string | null;
+  user_id: string;
+  book_title: string | null;
+}
+
+export async function fetchAdminComments(): Promise<AdminCommentRow[]> {
+  const supabase = await supabaseServerClient();
+
+  const [commentsRes, profileRes, entryRes, booksRes] = await Promise.all([
+    supabase.from("book_comments").select("*").order("created_at", { ascending: false }),
+    supabase.from("profiles").select("id, display_name"),
+    supabase.from("user_books").select("id, book_id"),
+    supabase.from("books").select("id, title"),
+  ]);
+
+  if (commentsRes.error) throw commentsRes.error;
+  if (profileRes.error) throw profileRes.error;
+  if (entryRes.error) throw entryRes.error;
+  if (booksRes.error) throw booksRes.error;
+
+  const userName = new Map(
+    ((profileRes.data ?? []) as { id: string; display_name: string | null }[]).map(
+      (p) => [p.id, p.display_name] as const,
+    ),
+  );
+  const bookTitle = new Map(
+    ((booksRes.data ?? []) as { id: string; title: string }[]).map((b) => [b.id, b.title] as const),
+  );
+  const entryToBook = new Map(
+    ((entryRes.data ?? []) as { id: string; book_id: string }[]).map(
+      (e) => [e.id, e.book_id] as const,
+    ),
+  );
+
+  return ((commentsRes.data ?? []) as { id: string; comment: string; created_at: string; user_id: string; book_id: string }[]).map(
+    (c) => ({
+      id: c.id,
+      comment: c.comment,
+      created_at: c.created_at,
+      user_id: c.user_id,
+      user_name: userName.get(c.user_id) ?? null,
+      book_title: entryToBook.has(c.book_id)
+        ? (bookTitle.get(entryToBook.get(c.book_id) as string) ?? null)
+        : null,
+    }),
+  );
+}
+
+export interface AdminCollectionRow {
+  id: string;
+  user_id: string;
+  user_name: string | null;
+  book_id: string;
+  book_title: string | null;
+  author_name: string | null;
+  location_node_id: string | null;
+  location_name: string | null;
+  rating: number | null;
+  created_at: string;
+}
+
+export async function fetchAdminCollections(): Promise<AdminCollectionRow[]> {
+  const supabase = await supabaseServerClient();
+
+  const [entriesRes, profilesRes, locationsRes] = await Promise.all([
+    supabase
+      .from("user_books")
+      .select("id, user_id, book_id, location_node_id, rating, created_at, book:books(title, author:authors(name))")
+      .order("created_at", { ascending: false }),
+    supabase.from("profiles").select("id, display_name"),
+    supabase.from("location_nodes").select("id, name"),
+  ]);
+
+  if (entriesRes.error) throw entriesRes.error;
+  if (profilesRes.error) throw profilesRes.error;
+  if (locationsRes.error) throw locationsRes.error;
+
+  const userName = new Map(
+    ((profilesRes.data ?? []) as { id: string; display_name: string | null }[]).map(
+      (p) => [p.id, p.display_name] as const,
+    ),
+  );
+  const locationName = new Map(
+    ((locationsRes.data ?? []) as { id: string; name: string }[]).map(
+      (l) => [l.id, l.name] as const,
+    ),
+  );
+
+  return ((entriesRes.data ?? []) as unknown as {
+    id: string;
+    user_id: string;
+    book_id: string;
+    location_node_id: string | null;
+    rating: number | null;
+    created_at: string;
+    book: { title: string | null; author: { name: string | null } | null } | null;
+  }[]).map((e) => ({
+    id: e.id,
+    user_id: e.user_id,
+    user_name: userName.get(e.user_id) ?? null,
+    book_id: e.book_id,
+    book_title: e.book?.title ?? null,
+    author_name: e.book?.author?.name ?? null,
+    location_node_id: e.location_node_id,
+    location_name: e.location_node_id
+      ? (locationName.get(e.location_node_id) ?? null)
+      : null,
+    rating: e.rating,
+    created_at: e.created_at,
+  }));
+}

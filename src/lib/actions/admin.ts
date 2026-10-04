@@ -119,3 +119,106 @@ export async function deleteCatalogBook(
   revalidatePath("/[locale]/admin/books", "page");
   return { error: null };
 }
+
+// ----------------------------------------
+// Moderación de comentarios (SÓLO admins)
+// ----------------------------------------
+
+const commentSchema = z.object({
+  id: z.string().uuid(),
+  comment: z.string().min(1).max(2000),
+});
+
+export async function updateAnyComment(
+  commentId: string,
+  comment: string,
+): Promise<{ error: string | null }> {
+  const parsed = commentSchema.safeParse({ id: commentId, comment });
+  if (!parsed.success) return { error: "admin.invalid_form" };
+
+  await assertAdmin();
+  const supabase = await supabaseServerClient();
+
+  const { error } = await supabase
+    .from("book_comments")
+    .update({ comment: parsed.data.comment })
+    .eq("id", commentId);
+
+  if (error) return { error: error.message };
+
+  revalidatePath("/[locale]/admin/comments", "page");
+  return { error: null };
+}
+
+export async function deleteAnyComment(
+  commentId: string,
+): Promise<{ error: string | null }> {
+  await assertAdmin();
+  const supabase = await supabaseServerClient();
+
+  const { error } = await supabase
+    .from("book_comments")
+    .delete()
+    .eq("id", commentId);
+
+  if (error) return { error: error.message };
+
+  revalidatePath("/[locale]/admin/comments", "page");
+  return { error: null };
+}
+
+// ----------------------------------------
+// Colecciones de usuarios (SÓLO admins)
+// ----------------------------------------
+
+const collectionSchema = z.object({
+  id: z.string().uuid(),
+  location_node_id: z.string().uuid().nullable().or(z.literal("")),
+  rating: z.coerce.number().int().min(0).max(5).nullable(),
+});
+
+export async function updateUserBook(
+  entryId: string,
+  locationNodeId: string | null,
+  rating: number | null,
+): Promise<{ error: string | null }> {
+  const parsed = collectionSchema.safeParse({
+    id: entryId,
+    location_node_id: locationNodeId ?? "",
+    rating: rating ?? null,
+  });
+  if (!parsed.success) return { error: "admin.invalid_form" };
+
+  await assertAdmin();
+  const supabase = await supabaseServerClient();
+
+  const { error } = await supabase
+    .from("user_books")
+    .update({
+      location_node_id: parsed.data.location_node_id || null,
+      rating: parsed.data.rating && parsed.data.rating > 0 ? parsed.data.rating : null,
+    })
+    .eq("id", entryId);
+
+  if (error) return { error: error.message };
+
+  revalidatePath("/[locale]/admin/collections", "page");
+  return { error: null };
+}
+
+export async function deleteAnyUserBook(
+  entryId: string,
+): Promise<{ error: string | null }> {
+  await assertAdmin();
+  const supabase = await supabaseServerClient();
+
+  const { error } = await supabase
+    .from("user_books")
+    .delete()
+    .eq("id", entryId);
+
+  if (error) return { error: error.message };
+
+  revalidatePath("/[locale]/admin/collections", "page");
+  return { error: null };
+}
