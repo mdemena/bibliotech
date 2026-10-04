@@ -99,16 +99,13 @@ CREATE POLICY "Users can delete own location nodes"
   ON location_nodes FOR DELETE
   USING (auth.uid() = user_id);
 
--- 4. Books table
+-- 4. Books (catálogo global compartido, desvinculado del usuario)
 CREATE TABLE IF NOT EXISTS books (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   author_id UUID REFERENCES authors(id) ON DELETE SET NULL,
-  location_node_id UUID REFERENCES location_nodes(id) ON DELETE SET NULL,
   isbn TEXT,
   title TEXT NOT NULL,
   language TEXT,
-  rating INT CHECK (rating >= 1 AND rating <= 5),
   cover_url TEXT,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
@@ -116,49 +113,62 @@ CREATE TABLE IF NOT EXISTS books (
 
 ALTER TABLE books ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own books"
+CREATE POLICY "Authenticated users can view all books"
   ON books FOR SELECT
-  USING (auth.uid() = user_id);
+  TO authenticated
+  USING (true);
 
-CREATE POLICY "Users can insert own books"
+CREATE POLICY "Authenticated users can insert books"
   ON books FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  TO authenticated
+  WITH CHECK (true);
 
-CREATE POLICY "Users can update own books"
+CREATE POLICY "Authenticated users can update books"
   ON books FOR UPDATE
-  USING (auth.uid() = user_id);
+  TO authenticated
+  USING (true)
+  WITH CHECK (true);
 
-CREATE POLICY "Users can delete own books"
+CREATE POLICY "Authenticated users can delete books"
   ON books FOR DELETE
-  USING (auth.uid() = user_id);
+  TO authenticated
+  USING (true);
 
--- 5. Book comments
-CREATE TABLE IF NOT EXISTS book_comments (
+-- 4b. User books (colección por usuario: libro + ubicación + valoración)
+CREATE TABLE IF NOT EXISTS user_books (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  book_id UUID NOT NULL REFERENCES books(id) ON DELETE CASCADE,
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-  comment TEXT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT now()
+  book_id UUID NOT NULL REFERENCES user_books(id) ON DELETE CASCADE,
+  location_node_id UUID REFERENCES location_nodes(id) ON DELETE SET NULL,
+  rating INT CHECK (rating >= 1 AND rating <= 5),
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE (user_id, book_id)
 );
 
-ALTER TABLE book_comments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_books ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Users can view own book comments"
-  ON book_comments FOR SELECT
-  USING (auth.uid() = user_id);
+CREATE POLICY "Users can view own user books"
+  ON user_books FOR SELECT
+  TO authenticated
+  USING ((select auth.uid()) = user_id);
 
-CREATE POLICY "Users can insert own book comments"
-  ON book_comments FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users can insert own user books"
+  ON user_books FOR INSERT
+  TO authenticated
+  WITH CHECK ((select auth.uid()) = user_id);
 
-CREATE POLICY "Users can update own book comments"
-  ON book_comments FOR UPDATE
-  USING (auth.uid() = user_id);
+CREATE POLICY "Users can update own user books"
+  ON user_books FOR UPDATE
+  TO authenticated
+  USING ((select auth.uid()) = user_id)
+  WITH CHECK ((select auth.uid()) = user_id);
 
-CREATE POLICY "Users can delete own book comments"
-  ON book_comments FOR DELETE
-  USING (auth.uid() = user_id);
+CREATE POLICY "Users can delete own user books"
+  ON user_books FOR DELETE
+  TO authenticated
+  USING ((select auth.uid()) = user_id);
 
+-- 5. Book comments (sobre la copia del usuario: user_books.id)
 -- 6. Trigger to auto-update updated_at on books
 CREATE OR REPLACE FUNCTION update_updated_at()
 RETURNS trigger AS $$
@@ -173,8 +183,9 @@ CREATE OR REPLACE TRIGGER books_updated_at
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 -- 7. Indexes for performance
-CREATE INDEX IF NOT EXISTS idx_books_user_id ON books(user_id);
 CREATE INDEX IF NOT EXISTS idx_books_author_id ON books(author_id);
+CREATE INDEX IF NOT EXISTS idx_user_books_user_id ON user_books(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_books_book_id ON user_books(book_id);
 CREATE INDEX IF NOT EXISTS idx_books_location_node_id ON books(location_node_id);
 CREATE INDEX IF NOT EXISTS idx_location_nodes_user_id ON location_nodes(user_id);
 CREATE INDEX IF NOT EXISTS idx_location_nodes_parent_id ON location_nodes(parent_id);

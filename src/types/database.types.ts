@@ -82,37 +82,29 @@ export type Database = {
       books: {
         Row: {
           id: string;
-          user_id: string;
           author_id: string | null;
-          location_node_id: string | null;
           isbn: string | null;
           title: string;
           language: string | null;
-          rating: number | null;
           cover_url: string | null;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id?: string;
-          user_id?: string;
           author_id?: string | null;
-          location_node_id?: string | null;
           isbn?: string | null;
           title: string;
           language?: string | null;
-          rating?: number | null;
           cover_url?: string | null;
           created_at?: string;
           updated_at?: string;
         };
         Update: {
           author_id?: string | null;
-          location_node_id?: string | null;
           isbn?: string | null;
           title?: string;
           language?: string | null;
-          rating?: number | null;
           cover_url?: string | null;
           updated_at?: string;
         };
@@ -123,8 +115,44 @@ export type Database = {
             referencedRelation: "authors",
             referencedColumns: ["id"],
           },
+        ];
+      };
+      user_books: {
+        Row: {
+          id: string;
+          user_id: string;
+          book_id: string;
+          location_node_id: string | null;
+          rating: number | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string;
+          book_id: string;
+          location_node_id?: string | null;
+          rating?: number | null;
+          created_at?: string;
+        };
+        Update: {
+          location_node_id?: string | null;
+          rating?: number | null;
+        };
+        Relationships: [
           {
-            foreignKeyName: "books_location_node_id_fkey",
+            foreignKeyName: "user_books_user_id_fkey",
+            columns: ["user_id"],
+            referencedRelation: "users",
+            referencedColumns: ["id"],
+          },
+          {
+            foreignKeyName: "user_books_book_id_fkey",
+            columns: ["book_id"],
+            referencedRelation: "books",
+            referencedColumns: ["id"],
+          },
+          {
+            foreignKeyName: "user_books_location_node_id_fkey",
             columns: ["location_node_id"],
             referencedRelation: "location_nodes",
             referencedColumns: ["id"],
@@ -153,7 +181,7 @@ export type Database = {
           {
             foreignKeyName: "book_comments_book_id_fkey",
             columns: ["book_id"],
-            referencedRelation: "books",
+            referencedRelation: "user_books",
             referencedColumns: ["id"],
           },
         ];
