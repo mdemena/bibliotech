@@ -118,7 +118,12 @@
         "cancel": "Cancelar",
         "invalid_form": "Formulario inválido",
         "empty_comment": "El comentario está vacío",
-        "could_not_create": "Could not create the book in the catalog"
+        "could_not_create": "Could not create the book in the catalog",
+        "scan_title": "Scan barcode",
+        "scan_hint": "Point the book's ISBN barcode at the camera",
+        "scan_manual_placeholder": "Type ISBN manually...",
+        "scan_check": "Check",
+        "scan_permission": "Camera unavailable. Check browser permissions."
     },
     "authors": {
         "title": "Authors Catalog",

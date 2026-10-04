@@ -118,7 +118,12 @@
         "cancel": "Cancel·la",
         "invalid_form": "Formulari invàlid",
         "empty_comment": "El comentari està buit",
-        "could_not_create": "No s'ha pogut crear el llibre al catàleg"
+        "could_not_create": "No s'ha pogut crear el llibre al catàleg",
+        "scan_title": "Escanejar codi de barres",
+        "scan_hint": "Aproxima el codi de barres de l'ISBN a la càmera",
+        "scan_manual_placeholder": "Escriure ISBN manualment...",
+        "scan_check": "Comprovar",
+        "scan_permission": "No s'ha pogut accedir a la càmera. Comprova els permisos."
     },
     "authors": {
         "title": "Catàleg d'Autors",

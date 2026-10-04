@@ -217,3 +217,78 @@ export async function deleteComment(commentId: string): Promise<void> {
   await supabase.from("book_comments").delete().eq("id", commentId);
   revalidatePath("/[locale]/books/[id]", "page");
 }
+
+// ----------------------------------------
+// Escáner de código de barras (ISBN)
+// ----------------------------------------
+
+const isbnSchema = z
+  .string()
+  .transform((v) => v.replace(/\D/g, ""))
+  .pipe(z.string().min(8).max(17));
+
+export type CheckIsbnResult = {
+  status: "owned" | "catalog" | "unknown";
+  /** entry_id si status === "owned" */
+  entry_id?: string;
+  /** datos de catálogo si exists en books (owned también) */
+  title?: string;
+  author_id?: string | null;
+  language?: string | null;
+  cover_url?: string | null;
+};
+
+/**
+ * Comprueba un ISBN escaneado:
+ * - "owned": el usuario ya tiene el libro en su colección
+ * - "catalog": existe en la tabla maestra (pero no en su colección)
+ * - "unknown": no existe en el catálogo → hay que crearlo
+ */
+export async function checkIsbn(isbn: string): Promise<CheckIsbnResult> {
+  const parsed = isbnSchema.safeParse(isbn);
+  if (!parsed.success) return { status: "unknown" };
+
+  const cleaned = parsed.data;
+  const supabase = await supabaseServerClient();
+  const userId = await getAuthenticatedUserId();
+
+  const { data: catalogRow } = await supabase
+    .from("books")
+    .select("id, title, author_id, language, cover_url")
+    .eq("isbn", cleaned)
+    .limit(1)
+    .maybeSingle();
+
+  const catalog = catalogRow as
+    | { id: string; title: string; author_id: string | null; language: string | null; cover_url: string | null }
+    | null;
+
+  if (!catalog) {
+    return { status: "unknown" };
+  }
+
+  const { data: owned } = await supabase
+    .from("user_books")
+    .select("id")
+    .match({ user_id: userId, book_id: catalog.id })
+    .maybeSingle();
+
+  if (owned) {
+    return {
+      status: "owned",
+      entry_id: (owned as { id: string }).id,
+      title: catalog.title,
+      author_id: catalog.author_id,
+      language: catalog.language,
+      cover_url: catalog.cover_url,
+    };
+  }
+
+  return {
+    status: "catalog",
+    title: catalog.title,
+    author_id: catalog.author_id,
+    language: catalog.language,
+    cover_url: catalog.cover_url,
+  };
+}

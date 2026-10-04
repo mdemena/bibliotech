@@ -118,7 +118,12 @@
         "cancel": "Utzi",
         "invalid_form": "Inprimaki baliogabea",
         "empty_comment": "Iruzkina hutsik dago",
-        "could_not_create": "Liburuaren sortu ezin izan da katalogoan"
+        "could_not_create": "Liburuaren sortu ezin izan da katalogoan",
+        "scan_title": "Barra-kodea eskaneatu",
+        "scan_hint": "Liburuaren ISBN kodea kamerara hurbildu",
+        "scan_manual_placeholder": "ISBN eskuz idatzi...",
+        "scan_check": "Egiaztatu",
+        "scan_permission": "Kameraren aisiarik ezba ez da lortu. Egiaztatu baimenak."
     },
     "authors": {
         "title": "Egileen Katalogoa",

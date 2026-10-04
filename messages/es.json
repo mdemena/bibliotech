@@ -118,7 +118,12 @@
         "cancel": "Cancelar",
         "invalid_form": "Formulario inválido",
         "empty_comment": "El comentario está vacío",
-        "could_not_create": "No se pudo crear el libro en el catálogo"
+        "could_not_create": "No se pudo crear el libro en el catálogo",
+        "scan_title": "Escanear código de barras",
+        "scan_hint": "Aproxima el código de barras del ISBN a la cámara",
+        "scan_manual_placeholder": "Escribir ISBN manualmente...",
+        "scan_check": "Comprobar",
+        "scan_permission": "No se pudo acceder a la cámara. Comprueba los permisos del navegador."
     },
     "authors": {
         "title": "Catálogo de Autores",

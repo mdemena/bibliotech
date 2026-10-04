@@ -2,13 +2,14 @@
 
 import { useMemo, useState, useTransition } from "react";
 import {
-  BookOpen, ChevronRight, Plus, Search, Star, Trash2, Edit2, User, Filter,
+  BookOpen, ChevronRight, Plus, ScanLine, Search, Star, Trash2, Edit2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/routing";
 import type { Book, AuthorFormData } from "@/types";
 import type { Author } from "@/types";
-import { deleteBook } from "@/lib/actions/books";
+import { checkIsbn, deleteBook, type CheckIsbnResult } from "@/lib/actions/books";
+import { ScannerDialog } from "@/components/app/ScannerDialog";
 import { BookFormDialog } from "@/components/app/BookFormDialog";
 import { ConfirmDialog } from "@/components/app/ConfirmDialog";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,33 @@ export function BooksClient({
   const [formOpen, setFormOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Book | null>(null);
+  const [scanOpen, setScanOpen] = useState(false);
+  const [scannerPrefill, setScannerPrefill] = useState<
+    { isbn: string; title: string; author_id: string; language: string; cover_url: string } | undefined
+  >();
+  const [result, setResult] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const locale = useLocale();
+  const router = useRouter();
+
+  /** English from scan bar: owned → opens detail; catalog/unknown → prefilled form */
+  const handleIsbnScanned = (isbn: string) => {
+    startTransition(async () => {
+      const res: CheckIsbnResult = await checkIsbn(isbn);
+      if (res.status === "owned" && res.entry_id) {
+        router.push("/books/" + res.entry_id);
+        return;
+      }
+      setScannerPrefill({
+        isbn,
+        title: res.title ?? "",
+        author_id: res.author_id ?? "",
+        language: res.language ?? "",
+        cover_url: res.cover_url ?? "",
+      });
+      setFormOpen(true);
+    });
+  };
 
   const filteredBooks = useMemo(
     () =>
@@ -215,10 +242,17 @@ export function BooksClient({
         </div>
       )}
 
+      <ScannerDialog
+        open={scanOpen}
+        onIsbn={handleIsbnScanned}
+        onClose={() => setScanOpen(false)}
+      />
+
       <BookFormDialog
         open={formOpen}
         onOpenChange={setFormOpen}
         book={editingBook}
+        prefill={scannerPrefill}
         authors={authors}
         locations={
           books.length >= 0
