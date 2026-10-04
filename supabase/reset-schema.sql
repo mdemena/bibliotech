@@ -285,7 +285,7 @@ CREATE TRIGGER books_updated_at
 CREATE INDEX idx_books_author_id ON books(author_id);
 CREATE INDEX idx_user_books_user_id ON user_books(user_id);
 CREATE INDEX idx_user_books_book_id ON user_books(book_id);
-CREATE INDEX idx_books_location_node_id ON books(location_node_id);
+CREATE INDEX idx_user_books_location_node_id ON user_books(location_node_id);
 CREATE INDEX idx_location_nodes_user_id ON location_nodes(user_id);
 CREATE INDEX idx_location_nodes_parent_id ON location_nodes(parent_id);
 CREATE INDEX idx_book_comments_book_id ON book_comments(book_id);
