@@ -11,9 +11,10 @@ ALTER TABLE profiles
   CHECK (role IN ('user', 'admin'));
 
 -- ------------------------------------------------------------
--- Anti-self-promoción: los usuarios NO pueden cambiarse su propio rol.
--- Un trigger revierte/cualquier cambio de role hecho por alguien
--- distinto de un admin (RLS no permite comparar OLD vs NEW).
+-- Anti-self-promoción: los usuarios autenticados NO pueden cambiarse
+-- su propio rol. Sin JWT (SQL Editor / Table Editor del Dashboard /
+-- service_role) el cambio se permite: es cómo el owner promociona
+-- admins desde Supabase.
 -- ------------------------------------------------------------
 CREATE OR REPLACE FUNCTION public.current_profile_role()
 RETURNS TEXT
@@ -31,12 +32,25 @@ LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = ''
 AS $$
+DECLARE
+  acting_uid UUID := (select auth.uid());
 BEGIN
-  IF NEW.role <> OLD.role
-     AND COALESCE(public.current_profile_role(), 'user') <> 'admin' THEN
-    RAISE EXCEPTION 'solo un admin puede cambiar roles';
+  IF NEW.role = OLD.role THEN
+    RETURN NEW;
   END IF;
-  RETURN NEW;
+
+  -- Sin JWT (SQL Editor, Table Editor del Dashboard, service_role, migraciones):
+  -- el owner / backend tiene carta blanca. Aquí se promociona el primer admin.
+  IF acting_uid IS NULL THEN
+    RETURN NEW;
+  END IF;
+
+  -- Usuario autenticado: sólo puede cambiar roles si es admin
+  IF COALESCE((SELECT role FROM public.profiles WHERE id = acting_uid), 'user') = 'admin' THEN
+    RETURN NEW;
+  END IF;
+
+  RAISE EXCEPTION 'solo un admin puede cambiar roles: UPDATE profiles SET role = %, WHERE id = % impedido', NEW.role, NEW.id;
 END;
 $$;
 
