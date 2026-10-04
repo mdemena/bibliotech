@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import {
   Home, Book, Users, MapPin, Menu, LogOut, Settings, UserCircle,
-  ShieldCheck, MessageSquare, Library, type LucideIcon,
+  ShieldCheck, MessageSquare, Library, ChevronsLeft, ChevronsRight,
+  type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -37,7 +38,21 @@ export function AppShell({ user, role, children }: AppShellProps) {
   const t = useTranslations("common");
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean | null>(null);
   const [pending, startTransition] = useTransition();
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => {
+      setCollapsed(localStorage.getItem("bibliotech-sidebar") === "collapsed");
+    });
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  useEffect(() => {
+    if (collapsed !== null) {
+      localStorage.setItem("bibliotech-sidebar", collapsed ? "collapsed" : "expanded");
+    }
+  }, [collapsed]);
 
   const navItems: NavItem[] = [
     { label: t("dashboard"), href: "/dashboard", icon: Home },
@@ -58,7 +73,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
 
   const handleSignOut = () => startTransition(() => void signOut());
 
-  const renderItems = (items: NavItem[], onClose: boolean) =>
+  const renderItems = (items: NavItem[], isOnlyIcons: boolean) =>
     items.map((item) => {
       const isActive =
         pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -66,13 +81,22 @@ export function AppShell({ user, role, children }: AppShellProps) {
         <Link
           key={item.href}
           href={item.href}
-          className={cn("nav-link group relative", isActive && "nav-link-active")}
-          onClick={() => {
-            if (onClose) setSidebarOpen(false);
-          }}
+          title={item.label}
+          className={cn(
+            "nav-link group relative",
+            isOnlyIcons && "mx-auto w-fit px-0",
+            isActive && "nav-link-active",
+          )}
+          onClick={() => setSidebarOpen(false)}
         >
-          <item.icon size={20} className="mr-3 transition-transform group-hover:scale-110" />
-          <span className="relative z-10">{item.label}</span>
+          <item.icon
+            size={20}
+            className={cn(
+              isOnlyIcons ? "" : "mr-3",
+              "transition-all group-hover:scale-110",
+            )}
+          />
+          {!isOnlyIcons && <span className="relative z-10">{item.label}</span>}
         </Link>
       );
     });
@@ -80,52 +104,75 @@ export function AppShell({ user, role, children }: AppShellProps) {
   const navContent = (
     <div className="flex flex-col h-full p-4">
       <div className="flex items-center space-x-3 px-4 mb-10">
-        <div className="bg-blue-600 rounded-xl p-2 shadow-lg shadow-blue-500/40">
+        <div className="bg-blue-600 rounded-xl p-2 shadow-lg shadow-blue-500/40 shrink-0">
           <Book size={24} className="text-white" />
         </div>
-        <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-          BiblioTech
-        </span>
+        {collapsed !== true && (
+          <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+            BiblioTech
+          </span>
+        )}
+        <button
+          type="button"
+          className="hidden md:flex ml-auto w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer shrink-0"
+          onClick={() => setCollapsed((c) => !(c ?? false))}
+          aria-label="Toggle sidebar width"
+          title={collapsed ? "Expandir" : "Colapsar"}
+        >
+          {collapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+        </button>
       </div>
 
-      <nav className="space-y-1">{renderItems(navItems, false)}</nav>
+      <nav className="space-y-1">{collapsed ? renderItems(navItems, true) : renderItems(navItems, false)}</nav>
 
       {adminItems.length > 0 && (
         <nav className="space-y-1 pt-6 mt-4 border-t border-gray-200 dark:border-gray-700">
-          <p className="px-4 pb-2 text-[10px] uppercase tracking-widest text-gray-400 font-bold">
-            {t("admin")}
-          </p>
-          {renderItems(adminItems, false)}
+          {collapsed !== true && (
+            <p className="px-4 pb-2 text-[10px] uppercase tracking-widest text-gray-400 font-bold">
+              {t("admin")}
+            </p>
+          )}
+          {collapsed ? renderItems(adminItems, true) : renderItems(adminItems, false)}
         </nav>
       )}
 
       <div className="mt-auto space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="px-4 py-2">
-          <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-3">
-            {t("language")}
-          </p>
-          <LanguageSwitcher />
-        </div>
+        {collapsed !== true && (
+          <div className="px-4 py-2">
+            <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-3">
+              {t("language")}
+            </p>
+            <LanguageSwitcher />
+          </div>
+        )}
 
-        <ThemeToggle style="full" />
+        <ThemeToggle style={collapsed ? "icon" : "full"} />
 
         {/* Tarjeta de usuario fija al pie del sidebar */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="w-full flex items-center gap-3 px-3 py-3 mt-2 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all cursor-pointer bg-transparent text-left"
+              title={user.displayName}
+              className={cn(
+                "flex items-center gap-3 mt-2 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all cursor-pointer bg-transparent",
+                collapsed ? "mx-auto w-fit p-2.5" : "w-full px-3 py-3 text-left",
+              )}
             >
               <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-blue-500/20">
                 {user.displayName?.[0]?.toUpperCase()}
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
-                  {user.displayName}
-                </p>
-                <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
-              </div>
-              <Settings size={16} className="text-gray-400 shrink-0" />
+              {collapsed !== true && (
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                    {user.displayName}
+                  </p>
+                  <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
+                </div>
+              )}
+              {collapsed !== true && (
+                <Settings size={16} className="text-gray-400 shrink-0" />
+              )}
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -164,7 +211,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
         />
       )}
 
-      <aside className={`sidebar ${sidebarOpen ? "sidebar-on" : ""}`}>
+      <aside className={`sidebar ${sidebarOpen ? "sidebar-on" : ""} ${collapsed ? "collapsed" : ""}`}>
         {navContent}
       </aside>
 
