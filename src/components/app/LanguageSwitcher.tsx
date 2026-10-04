@@ -5,6 +5,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { locales } from "@/i18n/routing";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { useLocale } from "next-intl";
+import { saveUserLocale } from "@/lib/actions/auth";
 import { cn } from "@/lib/utils";
 
 interface Language {
@@ -100,8 +101,9 @@ export function LanguageSwitcher({
   const [pending, startTransition] = useTransition();
 
   const changeLanguage = (locale: string) => {
-    startTransition(() => {
+    startTransition(async () => {
       router.replace(pathname, { locale });
+      await saveUserLocale(locale);
     });
   };
 

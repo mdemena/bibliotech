@@ -9,6 +9,7 @@ export type Database = {
           display_name: string | null;
           avatar_url: string | null;
           role: string;
+          locale: string | null;
           created_at: string;
         };
         Insert: {
@@ -16,12 +17,14 @@ export type Database = {
           display_name?: string | null;
           avatar_url?: string | null;
           role?: string;
+          locale?: string | null;
           created_at?: string;
         };
         Update: {
           display_name?: string | null;
           avatar_url?: string | null;
           role?: string;
+          locale?: string | null;
           created_at?: string;
         };
         Relationships: [];
