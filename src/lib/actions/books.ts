@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { supabaseServerClient, getAuthenticatedUserId } from "@/lib/supabase/server";
+import { getUserRole } from "@/lib/auth";
 
 const bookSchema = z.object({
   id: z.string().uuid().optional(),
@@ -114,6 +115,9 @@ export async function saveBook(formData: FormData): Promise<{ error: string | nu
     location_node_id: clean(location_node_id),
     rating: rating && rating > 0 ? rating : null,
   };
+  const role = await getUserRole();
+  const isAdmin = role === "admin";
+
   if (id) {
     // Editar: encontrar la entrada + el libro de catálogo vinculado
     const { data: entry, error: entryError } = await supabase
@@ -125,10 +129,16 @@ export async function saveBook(formData: FormData): Promise<{ error: string | nu
 
     if (entryError || !entry) return { error: "books.not_found" };
 
-    const [entryResult, catalogResult] = await Promise.all([
-      supabase.from("user_books").update(entryPayload).eq("id", id),
-      supabase.from("books").update(catalogPayload).eq("id", entry.book_id),
-    ]);
+    // El catálogo maestro (título/ISBN/portada) solo lo toca un admin; el resto
+    // de usuarios solo puede actualizar su copia (ubicación/valoración).
+    const entryResult = await supabase
+      .from("user_books")
+      .update(entryPayload)
+      .eq("id", id);
+
+    const catalogResult = isAdmin
+      ? await supabase.from("books").update(catalogPayload).eq("id", entry.book_id)
+      : { error: null };
 
     if (entryResult.error) return { error: entryResult.error.message };
     if (catalogResult.error) return { error: catalogResult.error.message };

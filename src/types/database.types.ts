@@ -8,17 +8,20 @@ export type Database = {
           id: string;
           display_name: string | null;
           avatar_url: string | null;
+          role: string;
           created_at: string;
         };
         Insert: {
           id: string;
           display_name?: string | null;
           avatar_url?: string | null;
+          role?: string;
           created_at?: string;
         };
         Update: {
           display_name?: string | null;
           avatar_url?: string | null;
+          role?: string;
           created_at?: string;
         };
         Relationships: [];

@@ -18,7 +18,8 @@
         "menu": "Menú",
         "account": "Compte",
         "settings": "Ajustos",
-        "total_books": "Total llibres"
+        "total_books": "Total llibres",
+        "admin": "Admin"
     },
     "home": {
         "title": "La teva biblioteca, perfectament organitzada.",
@@ -194,5 +195,12 @@
         "no_comments": "Encara no hi ha comentaris",
         "your_comment": "El teu comentari",
         "delete_comment": "Elimina el comentari"
+    },
+    "admin": {
+        "title": "Gestió",
+        "subtitle": "Àrea reservada a administradors",
+        "todo_master_data": "Gestió del catàleg mestre de llibres",
+        "todo_users": "Gestió d'usuaris i rols",
+        "todo_catalog": "Revisió de dades mestres"
     }
 }

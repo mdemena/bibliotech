@@ -18,7 +18,8 @@
         "menu": "Menu",
         "account": "Compte",
         "settings": "Paramètres",
-        "total_books": "Total livres"
+        "total_books": "Total livres",
+        "admin": "Admin"
     },
     "home": {
         "title": "Votre bibliothèque, parfaitement organisée.",
@@ -194,5 +195,12 @@
         "no_comments": "Aucun commentaire pour le moment",
         "your_comment": "Ton commentaire",
         "delete_comment": "Supprimer le commentaire"
+    },
+    "admin": {
+        "title": "Administration",
+        "subtitle": "Zone réservée aux administrateurs",
+        "todo_master_data": "Gestion du catalogue maître de livres",
+        "todo_users": "Gestion des utilisateurs et des rôles",
+        "todo_catalog": "Révision des données maîtresses"
     }
 }

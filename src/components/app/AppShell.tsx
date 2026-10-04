@@ -17,12 +17,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/lib/actions/auth";
+import type { UserRole } from "@/lib/auth";
 
 interface AppShellProps {
   user: {
     email: string | undefined;
     displayName: string;
   };
+  role: UserRole;
   children: React.ReactNode;
 }
 
@@ -32,7 +34,7 @@ interface NavItem {
   icon: LucideIcon;
 }
 
-export function AppShell({ user, children }: AppShellProps) {
+export function AppShell({ user, role, children }: AppShellProps) {
   const t = useTranslations("common");
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,6 +46,10 @@ export function AppShell({ user, children }: AppShellProps) {
     { label: t("authors"), href: "/authors", icon: Users },
     { label: t("locations"), href: "/locations", icon: MapPin },
   ];
+
+  if (role === "admin") {
+    navItems.push({ label: t("admin"), href: "/admin", icon: Settings });
+  }
 
   const handleSignOut = () => startTransition(() => void signOut());
 

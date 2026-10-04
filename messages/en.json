@@ -18,7 +18,8 @@
         "menu": "Menú",
         "account": "Cuenta",
         "settings": "Ajustes",
-        "total_books": "Total libros"
+        "total_books": "Total libros",
+        "admin": "Admin"
     },
     "home": {
         "title": "Your library, perfectly organized.",
@@ -194,5 +195,12 @@
         "no_comments": "Sin comentarios todavía",
         "your_comment": "Tu comentario",
         "delete_comment": "Eliminar comentario"
+    },
+    "admin": {
+        "title": "Administration",
+        "subtitle": "Admin-only area",
+        "todo_master_data": "Manage the master book catalog",
+        "todo_users": "Manage users and roles",
+        "todo_catalog": "Review master data"
     }
 }

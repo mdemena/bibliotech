@@ -18,7 +18,8 @@
         "menu": "Menua",
         "account": "Kontua",
         "settings": "Ezarpenak",
-        "total_books": "Guztira liburuak"
+        "total_books": "Guztira liburuak",
+        "admin": "Administrazioa"
     },
     "home": {
         "title": "Zure liburutegia, hobekien antolatuta.",
@@ -194,5 +195,12 @@
         "no_comments": "Iruzkinik ez oraindik",
         "your_comment": "Zure iruzkina",
         "delete_comment": "Iruzkina ezabatu"
+    },
+    "admin": {
+        "title": "Kudeaketa",
+        "subtitle": "Administratzaileentzako eremua",
+        "todo_master_data": "Liburu nagusien katalogoa kudeatzea",
+        "todo_users": "Erabiltzaileak eta rolak kudeatzea",
+        "todo_catalog": "Oinarrizko datuen berrikuspena"
     }
 }

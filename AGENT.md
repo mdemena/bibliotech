@@ -125,6 +125,16 @@ src/
 
 ## Estado actual / tareas conocidas pendientes
 
+- Roles en `profiles.role` ('user' | 'admin'). Un trigger `enforce_profile_role_change`
+  impide la auto-promoción; el primer admin se promociona a mano con
+  `UPDATE profiles SET role='admin' WHERE id='<uuid>'`. Helper RSC:
+  `getUserRole()`/`isAdmin()` en `src/lib/auth.ts`, helper SQL `public.is_admin()`.
+- Área admin en `/[locale]/admin`: guard por layout (no-admin → dashboard) y
+  placeholder pendiente de funcionalidades reales (catálogo maestro, usuarios).
+  En la UI, el enlace Admin solo aparece a admins.
+  Al editar un libro, un usuario normal solo cambia su copia (user_books);
+  el catálogo global (`books`) solo lo edita un admin.
+
 - Iconos PWA generados en `public/icons/` (192/512 + apple-touch-icon).
 - Web Push completo: el cliente se suscribe al iniciar sesión y guarda la
   suscripción en `push_subscriptions`; el envío es `POST /api/push/send`
