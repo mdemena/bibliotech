@@ -104,13 +104,18 @@ src/
 8. **Env vars**: solo `NEXT_PUBLIC_*` y las de Supabase publishable; nunca
    claves `service_role`. Ver `.env.example`. Para Web Push hacen falta
    `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` (pendiente de configurar).
-9. **Base de datos**: cambios de esquema se documentan/aplican con SQL en
-   `supabase-schema.sql` (SQL Editor de Supabase); habilitar RLS + policies con
-   `TO authenticated` + predicado de ownership, nunca solo `authenticated`.
-   Las migraciones futuras de Supabase se generan SIEMPRE en la carpeta
-   `supabase/` del repo (con `supabase migration new <nombre>` o en
-   `supabase/migrations/` si se trabaja con CLI local); no crearlas fuera de
-   ahí ni inventar nombres de fichero.
+9. **Base de datos**: los cambios de esquema van SIEMPRE en ficheros de
+   migración separados dentro de `supabase/migrations/` (formato de nombre del
+   CLI Supabase: `AAAA-MM-DD-HHMMSS_nombre.sql`; crearlos con
+   `supabase migration new <nombre>` si hay CLI, o a mano respetando ese
+   formato si no). Nunca editar `supabase/supabase-schema.sql` para introducir
+   cambios: ese fichero es sólo la referencia del esquema completo/foto del
+   estado. Las migraciones deben ser idempotentes en lo posible
+   (`IF [NOT] EXISTS`, `DROP POLICY IF EXISTS` + `CREATE`) y aplicar RLS +
+   policies con `TO authenticated` + predicado de ownership, nunca solo
+   `authenticated`. Aplicarlas con SQL Editor o `supabase db push`.
+   Scripts de reset/reparación puntuales van en `supabase/` raíz con nombre
+   descriptivo (p. ej. `reset-schema.sql`, `repair-*.sql`).
 10. **Git flow**: se trabaja SIEMPRE directamente en `development` — no crear
     ramas por cada modificación. Los cambios se commitean en `development` y
     viajan a `main` mediante la PR de integración `development` → `main` (la
