@@ -123,11 +123,12 @@ src/
    Scripts de reset/reparación puntuales van en `supabase/` raíz con nombre
    descriptivo (p. ej. `reset-schema.sql`, `repair-*.sql`).
 10. **Git flow**: se trabaja SIEMPRE directamente en `development` — no crear
-    ramas por cada modificación. Los cambios se commitean en `development` y
-    viajan a `main` mediante la PR de integración `development` → `main` (la
-    PR acumula los commits de development). Sin merge automático: los PRs los
-    mergea SIEMPRE el owner manualmente — ningún agente debe mergear ni cerrar
-    un PR. No commitear artefactos ni secretos.
+    ramas por cada modificación. Las nuevas funcionalidades y correcciones
+    se hacen SIEMPRE en la rama `development`. Los cambios se commitean en
+    `development` y viajan a `main` mediante la PR de integración `development` → `main`
+    (la PR acumula los commits de development). La PR la crea SIEMPRE el owner
+    manualmente — ningún agente debe crear PRs ni mergearlas ni cerrarlas.
+    No commitear artefactos ni secretos.
 
 ## Estado actual / tareas conocidas pendientes
 
