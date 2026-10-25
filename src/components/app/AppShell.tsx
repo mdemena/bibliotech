@@ -177,7 +177,8 @@ export function AppShell({ user, role, children }: AppShellProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             side="top"
-            align="start"
+            align="end"
+            sideOffset={8}
             className="dropdown-menu"
           >
             <Link
