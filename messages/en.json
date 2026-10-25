@@ -306,7 +306,7 @@
         "save": "Save",
         "display_name_edit": "Edit username",
         "name": "Name",
-        "collections_title": "User collections",
+        "collections_title": "User locations",
         "collections_subtitle": "Every user's entries (book + location + rating)",
         "collections_search": "Search by user, book or author...",
         "books_col": "Book",

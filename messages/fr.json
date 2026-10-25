@@ -306,7 +306,7 @@
         "save": "Enregistrer",
         "display_name_edit": "Modifier le nom d'utilisateur",
         "name": "Nom",
-        "collections_title": "Collections des utilisateurs",
+        "collections_title": "Emplacements des utilisateurs",
         "collections_subtitle": "Les entrées (livre + emplacement + note) de tous les utilisateurs",
         "collections_search": "Rechercher par utilisateur, livre ou auteur...",
         "books_col": "Livre",
