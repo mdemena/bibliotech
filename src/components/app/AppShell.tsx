@@ -171,7 +171,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
                 </div>
               )}
               {collapsed !== true && (
-                <Settings size={16} className="text-gray-400 shrink-0" />
+                <ChevronsLeft size={16} className="text-gray-400 shrink-0 rotate-90" />
               )}
             </button>
           </DropdownMenuTrigger>
@@ -187,6 +187,14 @@ export function AppShell({ user, role, children }: AppShellProps) {
             >
               <UserCircle size={16} className="mr-3" />
               {t("profile")}
+            </Link>
+            <Link
+              href="/profile"
+              className="dropdown-item cursor-pointer"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <Settings size={16} className="mr-3" />
+              {t("settings")}
             </Link>
             <button
               className="dropdown-item text-red-600 dark:text-red-400 cursor-pointer"

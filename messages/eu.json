@@ -22,10 +22,10 @@
         "admin": "Administrazioa",
         "users": "Erabiltzaileak",
         "admin_menu": "Admin panela",
-        "admin_books": "Katalogo nagusia",
+        "admin_books": "Liburuak",
         "admin_users": "Erabiltzaileak",
         "profile": "Profila",
-        "admin_authors": "Egileak (rakontzaileak)",
+        "admin_authors": "Egileak",
         "admin_comments": "Iruzkinak",
         "admin_collections": "Bildumak"
     },

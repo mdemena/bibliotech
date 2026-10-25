@@ -22,10 +22,10 @@
         "admin": "Admin",
         "users": "Usuarios",
         "admin_menu": "Panel admin",
-        "admin_books": "Catálogo maestro",
+        "admin_books": "Libros",
         "admin_users": "Usuarios",
         "profile": "Perfil",
-        "admin_authors": "Autores (maestro)",
+        "admin_authors": "Autores",
         "admin_comments": "Comentarios",
         "admin_collections": "Colecciones"
     },
