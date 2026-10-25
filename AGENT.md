@@ -124,12 +124,7 @@ src/
    descriptivo (p. ej. `reset-schema.sql`, `repair-*.sql`).
 10. **Git flow**: se trabaja SIEMPRE directamente en `development` — no crear
     ramas por cada modificación. Las nuevas funcionalidades y correcciones
-    se hacen SIEMPRE en la rama `development`. Los cambios se commitean en
-    `development` y viajan a `main` mediante la PR de integración `development` → `main`
-    (la PR acumula los commits de development). La PR la crea SIEMPRE el owner
-    manualmente — ningún agente debe crear PRs ni mergearlas ni cerrarlas.
-    El push al remoto lo hará SOLO el owner cuando lo indique — ningún agente
-    debe hacer `git push` de forma automática. No commitear artefactos ni secretos.
+    se hacen SIEMPRE en la rama `development`. Los cambios viajan a `main` mediante la PR de integración `development` → `main` (la PR acumula los commits de development). La PR la crea SIEMPRE el owner manualmente — ningún agente debe crear PRs ni mergearlas ni cerrarlas. **NUNCA** hacer `git commit` ni `git push` de forma automática. Solo cuando el owner lo indique explícitamente. No commitear artefactos ni secretos.
 
 ## Estado actual / tareas conocidas pendientes
 
