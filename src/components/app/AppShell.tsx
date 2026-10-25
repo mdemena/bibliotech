@@ -165,8 +165,11 @@ export function AppShell({ user, role, children }: AppShellProps) {
         )}
 
         {collapsed ? (
-          <div className="flex justify-center">
-            <ThemeToggle style="icon" />
+          <div className="flex justify-center w-full">
+            <ThemeToggle
+              style="icon"
+              className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            />
           </div>
         ) : (
           <ThemeToggle style="full" />
