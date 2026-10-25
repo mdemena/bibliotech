@@ -114,7 +114,10 @@ export function AppShell({ user, role, children }: AppShellProps) {
         )}
         <button
           type="button"
-          className="hidden md:flex ml-auto w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer shrink-0"
+          className={cn(
+            "hidden md:flex ml-auto w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer shrink-0",
+            collapsed && "mx-auto ml-0"
+          )}
           onClick={() => setCollapsed((c) => !(c ?? false))}
           aria-label="Toggle sidebar width"
           title={collapsed ? "Expandir" : "Colapsar"}
@@ -177,7 +180,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             side="top"
-            align="end"
+            align="start"
             sideOffset={8}
             className="dropdown-menu"
           >
@@ -188,14 +191,6 @@ export function AppShell({ user, role, children }: AppShellProps) {
             >
               <UserCircle size={16} className="mr-3" />
               {t("profile")}
-            </Link>
-            <Link
-              href="/profile"
-              className="dropdown-item cursor-pointer"
-              onClick={() => setSidebarOpen(false)}
-            >
-              <Settings size={16} className="mr-3" />
-              {t("settings")}
             </Link>
             <button
               className="dropdown-item text-red-600 dark:text-red-400 cursor-pointer"
