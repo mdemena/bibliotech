@@ -18,7 +18,20 @@
         "menu": "Menú",
         "account": "Cuenta",
         "settings": "Ajustes",
+<<<<<<< HEAD
         "total_books": "Total libros"
+=======
+        "total_books": "Total libros",
+        "admin": "Admin",
+        "users": "Usuarios",
+        "admin_menu": "Panel admin",
+        "admin_books": "Libros",
+        "admin_users": "Usuarios",
+        "profile": "Perfil",
+        "admin_authors": "Autores",
+        "admin_comments": "Comentarios",
+        "admin_collections": "Colecciones"
+>>>>>>> e414fe6 (feat: add user menu actions and update admin menu labels)
     },
     "home": {
         "title": "Tu biblioteca, perfectamente organizada.",

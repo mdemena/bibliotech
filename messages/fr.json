@@ -18,7 +18,20 @@
         "menu": "Menu",
         "account": "Compte",
         "settings": "Paramètres",
+<<<<<<< HEAD
         "total_books": "Total livres"
+=======
+        "total_books": "Total livres",
+        "admin": "Admin",
+        "users": "Utilisateurs",
+        "admin_menu": "Panneau admin",
+        "admin_books": "Livres",
+        "admin_users": "Utilisateurs",
+        "profile": "Profil",
+        "admin_authors": "Auteurs",
+        "admin_comments": "Commentaires",
+        "admin_collections": "Collections"
+>>>>>>> e414fe6 (feat: add user menu actions and update admin menu labels)
     },
     "home": {
         "title": "Votre bibliothèque, parfaitement organisée.",

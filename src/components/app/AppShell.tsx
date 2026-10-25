@@ -58,11 +58,71 @@ export function AppShell({ user, children }: AppShellProps) {
         </span>
       </div>
 
+<<<<<<< HEAD
       <nav className="flex-1 space-y-1">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
           return (
+=======
+      <nav className="space-y-1">{collapsed ? renderItems(navItems, true) : renderItems(navItems, false)}</nav>
+
+      {adminItems.length > 0 && (
+        <nav className="space-y-1 pt-6 mt-4 border-t border-gray-200 dark:border-gray-700">
+          {collapsed !== true && (
+            <p className="px-4 pb-2 text-[10px] uppercase tracking-widest text-gray-400 font-bold">
+              {t("admin")}
+            </p>
+          )}
+          {collapsed ? renderItems(adminItems, true) : renderItems(adminItems, false)}
+        </nav>
+      )}
+
+      <div className="mt-auto space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+        {collapsed !== true && (
+          <div className="px-4 py-2">
+            <p className="text-[10px] uppercase tracking-widest text-gray-400 font-bold mb-3">
+              {t("language")}
+            </p>
+            <LanguageSwitcher />
+          </div>
+        )}
+
+        <ThemeToggle style={collapsed ? "icon" : "full"} />
+
+        {/* Tarjeta de usuario fija al pie del sidebar */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              title={user.displayName}
+              className={cn(
+                "flex items-center gap-3 mt-2 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all cursor-pointer bg-transparent",
+                collapsed ? "mx-auto w-fit p-2.5" : "w-full px-3 py-3 text-left",
+              )}
+            >
+              <div className="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-blue-500/20">
+                {user.displayName?.[0]?.toUpperCase()}
+              </div>
+              {collapsed !== true && (
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                    {user.displayName}
+                  </p>
+                  <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
+                </div>
+              )}
+              {collapsed !== true && (
+                <ChevronsLeft size={16} className="text-gray-400 shrink-0 rotate-90" />
+              )}
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            side="top"
+            align="start"
+            className="dropdown-menu"
+          >
+>>>>>>> e414fe6 (feat: add user menu actions and update admin menu labels)
             <Link
               key={item.href}
               href={item.href}
@@ -72,6 +132,7 @@ export function AppShell({ user, children }: AppShellProps) {
               <item.icon size={20} className="mr-3 transition-transform group-hover:scale-110" />
               <span className="relative z-10">{item.label}</span>
             </Link>
+<<<<<<< HEAD
           );
         })}
       </nav>
@@ -85,6 +146,26 @@ export function AppShell({ user, children }: AppShellProps) {
         </div>
 
         <ThemeToggle style="full" />
+=======
+            <Link
+              href="/profile"
+              className="dropdown-item cursor-pointer"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <Settings size={16} className="mr-3" />
+              {t("settings")}
+            </Link>
+            <button
+              className="dropdown-item text-red-600 dark:text-red-400 cursor-pointer"
+              onClick={handleSignOut}
+              disabled={pending}
+            >
+              <LogOut size={16} className="mr-3" />
+              {t("logout")}
+            </button>
+          </DropdownMenuContent>
+        </DropdownMenu>
+>>>>>>> e414fe6 (feat: add user menu actions and update admin menu labels)
       </div>
     </div>
   );

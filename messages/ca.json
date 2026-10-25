@@ -18,7 +18,20 @@
         "menu": "Menú",
         "account": "Compte",
         "settings": "Ajustos",
+<<<<<<< HEAD
         "total_books": "Total llibres"
+=======
+        "total_books": "Total llibres",
+        "admin": "Admin",
+        "users": "Usuaris",
+        "admin_menu": "Panell admin",
+        "admin_books": "Llibres",
+        "admin_users": "Usuaris",
+        "profile": "Perfil",
+        "admin_authors": "Autors",
+        "admin_comments": "Comentaris",
+        "admin_collections": "Col·leccions"
+>>>>>>> e414fe6 (feat: add user menu actions and update admin menu labels)
     },
     "home": {
         "title": "La teva biblioteca, perfectament organitzada.",

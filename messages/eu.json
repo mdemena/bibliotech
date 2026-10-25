@@ -18,7 +18,20 @@
         "menu": "Menua",
         "account": "Kontua",
         "settings": "Ezarpenak",
+<<<<<<< HEAD
         "total_books": "Guztira liburuak"
+=======
+        "total_books": "Guztira liburuak",
+        "admin": "Administrazioa",
+        "users": "Erabiltzaileak",
+        "admin_menu": "Admin panela",
+        "admin_books": "Liburuak",
+        "admin_users": "Erabiltzaileak",
+        "profile": "Profila",
+        "admin_authors": "Egileak",
+        "admin_comments": "Iruzkinak",
+        "admin_collections": "Bildumak"
+>>>>>>> e414fe6 (feat: add user menu actions and update admin menu labels)
     },
     "home": {
         "title": "Zure liburutegia, hobekien antolatuta.",
