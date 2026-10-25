@@ -103,28 +103,43 @@ export function AppShell({ user, role, children }: AppShellProps) {
 
   const navContent = (
     <div className="flex flex-col h-full p-4">
-      <div className="flex items-center space-x-3 px-4 mb-10">
+      <div
+        className={cn(
+          "flex items-center mb-10",
+          collapsed ? "justify-center px-2" : "space-x-3 px-4"
+        )}
+      >
         <div className="bg-blue-600 rounded-xl p-2 shadow-lg shadow-blue-500/40 shrink-0">
           <Book size={24} className="text-white" />
         </div>
         {collapsed !== true && (
-          <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            BiblioTech
-          </span>
+          <>
+            <span className="text-xl font-bold tracking-tight text-gray-900 dark:text-white flex-1 min-w-0">
+              BiblioTech
+            </span>
+            <button
+              type="button"
+              className="flex w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer shrink-0"
+              onClick={() => setCollapsed((c) => !(c ?? false))}
+              aria-label="Toggle sidebar width"
+              title="Colapsar"
+            >
+              <ChevronsLeft size={18} />
+            </button>
+          </>
         )}
+      </div>
+      {collapsed === true && (
         <button
           type="button"
-          className={cn(
-            "hidden md:flex ml-auto w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer shrink-0",
-            collapsed && "mx-auto ml-0"
-          )}
-          onClick={() => setCollapsed((c) => !(c ?? false))}
+          className="hidden md:flex mx-auto mb-4 w-8 h-8 items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all cursor-pointer"
+          onClick={() => setCollapsed(false)}
           aria-label="Toggle sidebar width"
-          title={collapsed ? "Expandir" : "Colapsar"}
+          title="Expandir"
         >
-          {collapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+          <ChevronsRight size={18} />
         </button>
-      </div>
+      )}
 
       <nav className="space-y-1">{collapsed ? renderItems(navItems, true) : renderItems(navItems, false)}</nav>
 
