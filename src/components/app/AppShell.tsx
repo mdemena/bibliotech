@@ -67,7 +67,7 @@ export function AppShell({ user, role, children }: AppShellProps) {
         { label: t("admin_authors"), href: "/admin/authors", icon: Library },
         { label: t("admin_comments"), href: "/admin/comments", icon: MessageSquare },
         { label: t("admin_users"), href: "/admin/users", icon: ShieldCheck },
-        { label: t("admin_collections"), href: "/admin/collections", icon: MapPin },
+        { label: t("admin_collections"), href: "/admin/locations", icon: MapPin },
       ]
     : [];
 

@@ -202,7 +202,7 @@ export async function updateUserBook(
 
   if (error) return { error: error.message };
 
-  revalidatePath("/[locale]/admin/collections", "page");
+  revalidatePath("/[locale]/admin/locations", "page");
   return { error: null };
 }
 
@@ -219,6 +219,6 @@ export async function deleteAnyUserBook(
 
   if (error) return { error: error.message };
 
-  revalidatePath("/[locale]/admin/collections", "page");
+  revalidatePath("/[locale]/admin/locations", "page");
   return { error: null };
 }

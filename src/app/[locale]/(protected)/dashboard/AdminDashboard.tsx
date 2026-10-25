@@ -61,7 +61,7 @@ export default async function AdminDashboard({
     },
     {
       title: tCommon("admin_collections"),
-      href: `/${locale}/admin/collections`,
+      href: `/${locale}/admin/locations`,
       icon: MapPin,
       stats: [
         { label: t("entries_count"), value: collections.length },
