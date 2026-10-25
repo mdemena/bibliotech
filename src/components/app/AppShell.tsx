@@ -164,9 +164,13 @@ export function AppShell({ user, role, children }: AppShellProps) {
           </div>
         )}
 
-        <div className={cn(collapsed && "flex justify-center")}>
-          <ThemeToggle style={collapsed ? "icon" : "full"} />
-        </div>
+        {collapsed ? (
+          <div className="flex justify-center">
+            <ThemeToggle style="icon" />
+          </div>
+        ) : (
+          <ThemeToggle style="full" />
+        )}
 
         {/* Tarjeta de usuario fija al pie del sidebar */}
         <DropdownMenu>
