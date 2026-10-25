@@ -1,15 +1,13 @@
 import { setRequestLocale } from "next-intl/server";
 import { fetchAdminCollections, fetchLocations } from "@/lib/data";
-import { AdminCollectionsClient } from "./AdminCollectionsClient";
+import { AdminLocationsClient } from "./AdminLocationsClient";
 
-export default async function AdminCollectionsPage({
+export default async function AdminLocationsPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-
+  await params;
   const [collections, locations] = await Promise.all([fetchAdminCollections(), fetchLocations()]);
-  return <AdminCollectionsClient collections={collections} locations={locations} />;
+  return <AdminLocationsClient collections={collections} locations={locations} />;
 }

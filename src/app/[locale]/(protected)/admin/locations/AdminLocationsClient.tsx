@@ -13,7 +13,7 @@ import { ConfirmDialog } from "@/components/app/ConfirmDialog";
 import { Button } from "@/components/ui/button";
 import StarRating from "@/components/app/StarRating";
 
-export function AdminCollectionsClient({
+export function AdminLocationsClient({
   collections,
   locations,
 }: {
