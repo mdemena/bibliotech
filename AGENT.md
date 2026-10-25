@@ -91,6 +91,12 @@ src/
    páginas; añadir las keys a los 6 ficheros de `messages/*.json` (indentación de
    4 espacios, consistente con lo existente). Las keys nuevas se
    agregan a todos los locales, nunca solo a uno.
+   **Siempre que añadas UI o cambies textos**: revisa si harán falta literales
+   nuevos y añádelos TRADUCIDOS a los 6 idiomas (no es fallback ES). Antes de
+   commitear, pasa `npm run i18n:check` (scripts/check-i18n.mjs): escanea el
+   código y falla si falta alguna key en cualquier idioma. Los errores de
+   Supabase Auth se devuelven como claves i18n (src/lib/supabase/authErrors.ts),
+   no como mensajes crudos.
 5. **Auth**: las cookies de sesión las gestiona el middleware combinado; el
    matcher es `["/((?!api|_next|_vercel|.*\\..*).*)", "/"]` — si añades rutas
    nuevas en `app/`, no romper el regex (excluye `api` y ficheros con punto).
@@ -104,20 +110,38 @@ src/
 8. **Env vars**: solo `NEXT_PUBLIC_*` y las de Supabase publishable; nunca
    claves `service_role`. Ver `.env.example`. Para Web Push hacen falta
    `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` (pendiente de configurar).
-9. **Base de datos**: cambios de esquema se documentan/aplican con SQL en
-   `supabase-schema.sql` (SQL Editor de Supabase); habilitar RLS + policies con
-   `TO authenticated` + predicado de ownership, nunca solo `authenticated`.
-   Las migraciones futuras de Supabase se generan SIEMPRE en la carpeta
-   `supabase/` del repo (con `supabase migration new <nombre>` o en
-   `supabase/migrations/` si se trabaja con CLI local); no crearlas fuera de
-   ahí ni inventar nombres de fichero.
-10. **Git flow**: las ramas cortas (`feature/`, `fix/`, `chore/`) se crean desde
-    `development` y su PR apunta SIEMPRE a `development`. La única PR a `main`
-    es la de integración `development` → `main`. Los PRs los mergea SIEMPRE el
-    owner manualmente — ningún agente debe mergear ni cerrar un PR. No
-    commitear artefactos ni secretos.
+9. **Base de datos**: los cambios de esquema van SIEMPRE en ficheros de
+   migración separados dentro de `supabase/migrations/` (formato de nombre del
+   CLI Supabase: `AAAA-MM-DD-HHMMSS_nombre.sql`; crearlos con
+   `supabase migration new <nombre>` si hay CLI, o a mano respetando ese
+   formato si no). Nunca editar `supabase/supabase-schema.sql` para introducir
+   cambios: ese fichero es sólo la referencia del esquema completo/foto del
+   estado. Las migraciones deben ser idempotentes en lo posible
+   (`IF [NOT] EXISTS`, `DROP POLICY IF EXISTS` + `CREATE`) y aplicar RLS +
+   policies con `TO authenticated` + predicado de ownership, nunca solo
+   `authenticated`. Aplicarlas con SQL Editor o `supabase db push`.
+   Scripts de reset/reparación puntuales van en `supabase/` raíz con nombre
+   descriptivo (p. ej. `reset-schema.sql`, `repair-*.sql`).
+10. **Git flow**: se trabaja SIEMPRE directamente en `development` — no crear
+    ramas por cada modificación. Los cambios se commitean en `development` y
+    viajan a `main` mediante la PR de integración `development` → `main` (la
+    PR acumula los commits de development). Sin merge automático: los PRs los
+    mergea SIEMPRE el owner manualmente — ningún agente debe mergear ni cerrar
+    un PR. No commitear artefactos ni secretos.
 
 ## Estado actual / tareas conocidas pendientes
+
+- Roles en `profiles.role` ('user' | 'admin'). Un trigger `enforce_profile_role_change`
+  impide la auto-promoción; el primer admin se promociona a mano con
+  `UPDATE profiles SET role='admin' WHERE id='<uuid>'`. Helper RSC:
+  `getUserRole()`/`isAdmin()` en `src/lib/auth.ts`, helper SQL `public.is_admin()`.
+- Área admin en `/[locale]/admin`: guard por layout (no-admin → dashboard) y
+  placeholder pendiente de funcionalidades reales (catálogo maestro, usuarios).
+  Punto de entrada único: /dashboard renderiza la vista de usuario o, a admins,
+  la pestaña de accesos de gestión encima de su colección; el menú también
+  cambia según rol. En la UI, el enlace Admin solo aparece a admins.
+  Al editar un libro, un usuario normal solo cambia su copia (user_books);
+  el catálogo global (`books`) solo lo edita un admin.
 
 - Iconos PWA generados en `public/icons/` (192/512 + apple-touch-icon).
 - Web Push completo: el cliente se suscribe al iniciar sesión y guarda la

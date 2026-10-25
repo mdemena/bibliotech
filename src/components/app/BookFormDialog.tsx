@@ -25,6 +25,8 @@ interface BookFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   book: BookType | null;
+  /** Valores precargados (p. ej. desde el escáner de código de barras) */
+  prefill?: Partial<Pick<BookFormData, "isbn" | "title" | "author_id" | "language" | "cover_url">>;
   authors: Author[];
   locations: LocationNode[];
 }
@@ -33,6 +35,7 @@ export function BookFormDialog({
   open,
   onOpenChange,
   book,
+  prefill,
   authors,
   locations,
 }: BookFormDialogProps) {
@@ -53,11 +56,11 @@ export function BookFormDialog({
             location_node_id: book.location_node_id ?? "",
           }
         : {
-            title: "",
-            author_id: "",
-            isbn: "",
-            cover_url: "",
-            language: "",
+            title: prefill?.title ?? "",
+            author_id: prefill?.author_id ?? "",
+            isbn: prefill?.isbn ?? "",
+            cover_url: prefill?.cover_url ?? "",
+            language: prefill?.language ?? "",
             rating: 0,
             location_node_id: "",
           },
