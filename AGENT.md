@@ -128,7 +128,8 @@ src/
     `development` y viajan a `main` mediante la PR de integración `development` → `main`
     (la PR acumula los commits de development). La PR la crea SIEMPRE el owner
     manualmente — ningún agente debe crear PRs ni mergearlas ni cerrarlas.
-    No commitear artefactos ni secretos.
+    El push al remoto lo hará SOLO el owner cuando lo indique — ningún agente
+    debe hacer `git push` de forma automática. No commitear artefactos ni secretos.
 
 ## Estado actual / tareas conocidas pendientes
 
