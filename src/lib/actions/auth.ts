@@ -3,7 +3,9 @@
 import { z } from "zod";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { routing } from "@/i18n/routing";
 import { supabaseServerClient } from "@/lib/supabase/server";
+import { authErrorToKey } from "@/lib/supabase/authErrors";
 import type { FormState } from "@/lib/forms";
 
 const signInSchema = z.object({
@@ -36,9 +38,11 @@ export async function signIn(
   const supabase = await supabaseServerClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-  if (error) return { error: error.message };
+  if (error) return { error: authErrorToKey(error) };
 
-  redirect("/dashboard");
+  // Entrar directamente en el idioma guardado del usuario (si lo hay)
+  const saved = await getUserSavedLocale();
+  redirect(`/${saved ?? routing.defaultLocale}/dashboard`);
 }
 
 export async function signUp(
@@ -64,7 +68,7 @@ export async function signUp(
     options: { data: { display_name } },
   });
 
-  if (error) return { error: error.message };
+  if (error) return { error: authErrorToKey(error) };
   if (data.user) redirect("/login");
   return { error: null };
 }
@@ -82,6 +86,39 @@ export async function signInWithGoogle(locale: string): Promise<void> {
   });
 
   if (error) throw error;
+}
+
+
+/**
+ * Devuelve el idioma guardado en el profile del usuario autenticado
+ * (o null si no hay sesión/valor).
+ */
+export async function getUserSavedLocale(): Promise<string | null> {
+  const supabase = await supabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("locale")
+    .eq("id", user.id)
+    .single();
+
+  return profile?.locale ?? null;
+}
+
+/** Persiste el idioma elegido por el usuario autenticado (no-op sin sesión). */
+export async function saveUserLocale(locale: string): Promise<void> {
+  const allowed = ["es", "en", "ca", "gl", "eu", "fr"];
+  const supabase = await supabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user || !allowed.includes(locale)) return;
+
+  await supabase.from("profiles").update({ locale }).eq("id", user.id);
 }
 
 export async function signOut(): Promise<void> {

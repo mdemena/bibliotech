@@ -33,7 +33,7 @@ export async function saveLocation(
 
   const { error } = id
     ? await supabase.from("location_nodes").update(payload).eq("id", id)
-    : await supabase.from("location_nodes").insert(payload);
+    : await supabase.from("location_nodes").insert({ ...payload, user_id: (await getAuthenticatedUserId()) });
 
   if (error) return { error: error.message };
 

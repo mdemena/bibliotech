@@ -1,4 +1,5 @@
 import { supabaseServerClient } from "@/lib/supabase/server";
+import { getUserRole } from "@/lib/auth";
 import { AppShell } from "@/components/app/AppShell";
 import { ServiceWorkerRegistrar } from "@/components/app/ServiceWorkerRegistrar";
 
@@ -8,7 +9,10 @@ export default async function ProtectedLayout({
   children: React.ReactNode;
 }) {
   const supabase = await supabaseServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const [role, { data: { user } }] = await Promise.all([
+    getUserRole(),
+    supabase.auth.getUser(),
+  ]);
 
   const displayName =
     user?.user_metadata?.display_name ??
@@ -21,6 +25,7 @@ export default async function ProtectedLayout({
         email: user?.email,
         displayName,
       }}
+      role={role ?? "user"}
     >
       <ServiceWorkerRegistrar />
       {children}

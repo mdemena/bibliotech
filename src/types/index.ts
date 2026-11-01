@@ -27,6 +27,8 @@ export interface LocationNode {
 
 export interface Book {
   id: string;
+  /** id del libro en el catálogo global (books) */
+  book_id: string;
   user_id: string;
   author_id: string | null;
   location_node_id: string | null;
