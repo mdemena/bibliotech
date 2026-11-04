@@ -156,3 +156,11 @@ La skill `supabase` está disponible y debe usarse para cualquier cambio que
 toque la base de datos, Auth, RLS o Storage. Al diagnosticar errores de
 Supabase (RLS bloquea, PostgREST 4xx), consultar
 https://supabase.com/docs/guides/monitoring-and-debugging.md antes que la memoria.
+
+## Ahorro de contexto
+- Antes de leer un archivo entero, busca con grep y lee solo lo que necesites.
+- Para explorar el proyecto, usa un subagente y tráeme solo el resumen.
+- Muéstrame el diff, no el archivo completo.
+- No repitas lo que ya hemos decidido en esta sesión.
+- Si cambiamos de tarea, propón /compact o una sesión nueva.
+- Respuestas cortas por defecto.
